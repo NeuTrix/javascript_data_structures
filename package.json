@@ -1,0 +1,29 @@
+{
+  "name": "datastructures",
+  "version": "1.0.0",
+  "description": "a repository of classic datastructures deliverd in javaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeuTrix/javascript_data_structures.git"
+  },
+  "keywords": [
+    "javascript",
+    "datastructures",
+    "algorithms"
+  ],
+  "author": "NeuTrix",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NeuTrix/javascript_data_structures/issues"
+  },
+  "homepage": "https://github.com/NeuTrix/javascript_data_structures#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.5"
+  }
+}
