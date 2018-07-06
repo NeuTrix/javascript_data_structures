@@ -56,11 +56,15 @@ describe.only('The Trie Class', () => {
 
   describe('... the #display function', () => {
     
-    let arr= ['aged', 'again', 'apple','axe', 'bay' ];
-    // let arr= ['pickle', 'pop', 'McGill','array', 'Sandwich']
+    let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'sand', 'Sandwich', 'zoo', 'xyz', 'daddy'].join().toLowerCase().split(',').sort()
+
+    // .join().toUpperCase().sort().split('')
     it('... displays a tree', () => {
       arr.forEach( word => trie.insert(word))
-      trie.display();
+      let clear = `${'\n'.repeat(3)}`
+      console.log(clear)
+      console.log(`\n${clear} ${trie.display()}`);
+      // console.log(arr.join().toLowerCase().split(',').sort())
     });
   });
 

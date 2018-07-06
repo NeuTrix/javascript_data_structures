@@ -138,20 +138,20 @@ class Trie {
       let grands = kid.children
       let names = Object.keys(grands); // keys arr of the object set
       let count = names.length; // number of children for this node
-      let indent = `${"  | ".repeat(kid.level )}`
+      let indent = `${" | ".repeat(kid.level )}`
       // let indent = `${"  : ".repeat(kid.level )} ${"- ".repeat(kid.level )} `
       // console.log(`Node Level:  ${node.level} `)
       // highlight end of a completed word
       // console.log(`${node}`,'%%%', children)
       if ( kid.endOfWord === true) {
-        console.log(`${indent}  ${child} (end)`)
+        console.log(`${indent} ${child} . `)
         // console.log(`${indent} ${child} *, level: ${kid.level}`)
       } else if ( count >= 2) {
         // visually identify parent branches
-        console.log(`${indent}  ${child} ... ` )
+        console.log(`${indent} ${child} -+` )
         // console.log(`${indent} ${child} --> level: ${kid.level}`, names)
       } else {
-        console.log(`${indent}  ${child} ...`)
+        console.log(`${indent} ${child} -+`)
         // console.log(`${indent}`, child, `level: ${kid.level}`, Object.keys(grands))
       } 
       this.display(kid)
