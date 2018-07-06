@@ -7,7 +7,6 @@ class TrieNode {
   }
 }
 
-
 class Trie {
   constructor() {
     this.rootNode = new TrieNode('*');
@@ -39,6 +38,8 @@ class Trie {
       }
     }
     node.endOfWord = true;
+    let message = `\n ==> The word "${word}" was successfully added. \n`
+    return message
   }
 
   // determine if a word exists in this Trie
@@ -125,11 +126,11 @@ class Trie {
   }
 
   // provide visual display of the entire Trie instance
-  display(node) {
+  display(node= this.rootNode) {
     // !!! not nesting properly in a tree format
     
     if(!node) {
-      return "done"
+      return console.error(("Error: There are no nodes in this Trie"))
     }
     let children = node.children; // children objects for this node
 
@@ -152,29 +153,4 @@ class Trie {
   }
 }
 
-// ====== test scripts ======
-
-
-(function run() {
-  
-  let trie = new Trie()
-  trie.insert("giGGLes")
-  // trie.remove('Gig')
-  trie.insert("giles")
-  trie.insert("Rod")
-  trie.insert("Mike")
-  trie.insert("Mikey")
-  // trie.find("gigiddg")
-  // trie.display(trie.rootNode)
-  console.log("*".repeat(30))
-  trie.remove('giles')
-  trie.remove("giggles")
-  // trie.display(trie.rootNode)
-  console.log("*".repeat(30))
-  // trie.remove('mickey')
-  trie.remove('mikey')
-  trie.remove('mike')
-  trie.remove('rod')
-  // console.log(trie)
-  // console.log(trie.rootNode.children) 
-}())
+module.exports = Trie
