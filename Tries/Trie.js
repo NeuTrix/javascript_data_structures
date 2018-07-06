@@ -1,3 +1,5 @@
+var chalk = require('chalk')
+
 class TrieNode {
   constructor({level, parent = '', value} = {})  {
     this.value = value;
@@ -5,12 +7,14 @@ class TrieNode {
     this.level = level;
     this.children = {};
     this.endOfWord = false;
+    // color for console highlighting
+    this.color = false;
   }
 }
 
 class Trie {
   constructor() {
-    this.rootNode = new TrieNode({value: '*',level: 0});
+    this.rootNode = new TrieNode({value: '*', level: 0});
   }
   // insert a new word into the Trie instance
   insert(word) {
@@ -65,7 +69,7 @@ class Trie {
     console.log(`Found the word: "${found}"`)
     return true
   }
-  
+
   // remove a word from the Trie instance
   // !! how to remove a substring
   remove(word){
@@ -124,37 +128,34 @@ class Trie {
     return true
   }
 
-  // provide visual display of the entire Trie instance
+  // provide console display of the entire Trie instance
   display(node= this.rootNode) {
     // !!! not nesting properly in a tree format
-    
     if(!node) {
       return console.error(("Error: There are no nodes in this Trie"))
     }
     let children = node.children; // children objects for this node
 
-    for (let child in children) {
-      let kid = children[child]; // single kid obj for this node
-      let grands = kid.children
+    for (let name in children) {
+      let child = children[name]; // single child obj for this node
+      let grands = child.children // grand children of this node
       let names = Object.keys(grands); // keys arr of the object set
       let count = names.length; // number of children for this node
-      let indent = `${" | ".repeat(kid.level )}`
-      // let indent = `${"  : ".repeat(kid.level )} ${"- ".repeat(kid.level )} `
-      // console.log(`Node Level:  ${node.level} `)
-      // highlight end of a completed word
-      // console.log(`${node}`,'%%%', children)
-      if ( kid.endOfWord === true) {
-        console.log(`${indent} ${child} . `)
-        // console.log(`${indent} ${child} *, level: ${kid.level}`)
+      let indent = `${" | ".repeat(child.level )}` // level indicator
+      // Word endings are highlightes with a period ('.').
+      let highlight = chalk.yellow;
+      let parentCol = chalk.green;
+      if ( child.endOfWord === true) {
+        console.log(`${indent} ${child.color ? highlight(name): (name) } .`)
       } else if ( count >= 2) {
-        // visually identify parent branches
-        console.log(`${indent} ${child} -+` )
-        // console.log(`${indent} ${child} --> level: ${kid.level}`, names)
+        // Parent branches wit more than ond name are visually
+        // identified wih an asterisk and inverse color
+
+        console.log(`${indent} ${child.color ? highlight(name): parentCol(name)} -+`)
       } else {
-        console.log(`${indent} ${child} -+`)
-        // console.log(`${indent}`, child, `level: ${kid.level}`, Object.keys(grands))
+        console.log(`${indent} ${child.color ? highlight(name): name} -+`)
       } 
-      this.display(kid)
+      this.display(child)
     }
   }
 }
