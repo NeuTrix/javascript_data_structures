@@ -1,7 +1,8 @@
 class TrieNode {
-  constructor(letter = '', parent ={}) {
-    this.value = letter;
+  constructor({ value, parent = '' , level} = {})  {
+    this.value = value;
     this.parent = parent;
+    this.level = level;
     this.children = {};
     this.endOfWord = false;
   }
@@ -9,7 +10,7 @@ class TrieNode {
 
 class Trie {
   constructor() {
-    this.rootNode = new TrieNode('*');
+    this.rootNode = new TrieNode({value: '*',level: 2});
   }
 
   // convert word data to consistent format
@@ -18,11 +19,13 @@ class Trie {
   }
 
   // insert a new word into the Trie instance
+  // accept a single word or an array
   insert(word) {
     // clean the data, rest to lower case
     word = this.normalize(word);
     // set the root node
     let node = this.rootNode;
+    // let level = 0;
     // build the children in root node
     for (let i = 0; i < word.length; i += 1) {
       let letter = word[i];
@@ -31,7 +34,7 @@ class Trie {
         node = node.children[letter]
       // if not, then create new child node
       } else {
-        let newNode = new TrieNode(letter, node.value);
+        let newNode = new TrieNode({letter: letter, parent: node.value});
         node.children[letter] = newNode;
       // reset to next node
         node = newNode

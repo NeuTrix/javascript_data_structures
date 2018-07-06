@@ -33,16 +33,35 @@ describe.only('The Trie Class', () => {
     });
   });
 
-  describe('=> The #insert method ...', () => {
+  describe('=> The #insert method ...', () =>{
     
     it('... can add a new Node', () => {
       let before = Object.keys(root.children)
-      expect(before).to.have.lengthOf(0)
       trie.insert('wonderful');
+      trie.insert('winter');
+      trie.insert('ample');
       let after = Object.keys(root.children);
-      expect(after).to.have.lengthOf(0)
+      
+      expect(before).to.have.lengthOf(0)
+      expect(after).to.have.lengthOf(2)
+    });
+
+    it('... transforms the letters into lowerCase', () => {
+      trie.insert('MIN')
+      let keys = Object.keys(root.children)
+      console.log('ooooo',root)
+      expect(keys).to.have.lengthOf(1)
+      expect(keys[0]).to.eql('m')
     });
   });
 
+  describe('... the #display function', () => {
+    
+    let arr= ['pickle', 'pop', 'McGullicuddy', 'Sandwich']
+    it('... displays a tree', () => {
+      arr.forEach( word => trie.insert(word))
+      trie.display();
+    });
+  });
 
 });
