@@ -1,5 +1,5 @@
 class TrieNode {
-  constructor({ value, parent = '' , level} = {})  {
+  constructor({level, parent = '', value} = {})  {
     this.value = value;
     this.parent = parent;
     this.level = level;
@@ -10,22 +10,14 @@ class TrieNode {
 
 class Trie {
   constructor() {
-    this.rootNode = new TrieNode({value: '*',level: 2});
+    this.rootNode = new TrieNode({value: '*',level: 0});
   }
-
-  // convert word data to consistent format
-  normalize(word) {
-   return word.toLowerCase()
-  }
-
   // insert a new word into the Trie instance
-  // accept a single word or an array
   insert(word) {
     // clean the data, rest to lower case
-    word = this.normalize(word);
+    word = word.toUpperCase()
     // set the root node
     let node = this.rootNode;
-    // let level = 0;
     // build the children in root node
     for (let i = 0; i < word.length; i += 1) {
       let letter = word[i];
@@ -34,7 +26,11 @@ class Trie {
         node = node.children[letter]
       // if not, then create new child node
       } else {
-        let newNode = new TrieNode({letter: letter, parent: node.value});
+        let newNode = new TrieNode({
+          letter: letter, 
+          parent: node.value,
+          level: i
+        });
         node.children[letter] = newNode;
       // reset to next node
         node = newNode
@@ -47,7 +43,7 @@ class Trie {
 
   // determine if a word exists in this Trie
   find(word) {
-    word = this.normalize(word);
+    word = word.toUpperCase();
     let wrdArr = word.split('');
     // start at root
     let node = this.rootNode;
@@ -142,14 +138,21 @@ class Trie {
       let grands = kid.children
       let names = Object.keys(grands); // keys arr of the object set
       let count = names.length; // number of children for this node
+      let indent = `${"  | ".repeat(kid.level )}`
+      // let indent = `${"  : ".repeat(kid.level )} ${"- ".repeat(kid.level )} `
+      // console.log(`Node Level:  ${node.level} `)
       // highlight end of a completed word
+      // console.log(`${node}`,'%%%', children)
       if ( kid.endOfWord === true) {
-        console.log(`${child} * \n`)
-      } else if (count >= 2) {
-        // visually identify branches
-        console.log(`${"-".repeat(this.indent)}${child} -->`, names)
+        console.log(`${indent}  ${child} (end)`)
+        // console.log(`${indent} ${child} *, level: ${kid.level}`)
+      } else if ( count >= 2) {
+        // visually identify parent branches
+        console.log(`${indent}  ${child} ... ` )
+        // console.log(`${indent} ${child} --> level: ${kid.level}`, names)
       } else {
-        console.log(child)
+        console.log(`${indent}  ${child} ...`)
+        // console.log(`${indent}`, child, `level: ${kid.level}`, Object.keys(grands))
       } 
       this.display(kid)
     }

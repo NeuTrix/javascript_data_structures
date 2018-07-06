@@ -46,18 +46,18 @@ describe.only('The Trie Class', () => {
       expect(after).to.have.lengthOf(2)
     });
 
-    it('... transforms the letters into lowerCase', () => {
+    it('... transforms the letters into upperCase', () => {
       trie.insert('MIN')
       let keys = Object.keys(root.children)
-      console.log('ooooo',root)
       expect(keys).to.have.lengthOf(1)
-      expect(keys[0]).to.eql('m')
+      expect(keys[0]).to.eql('M')
     });
   });
 
   describe('... the #display function', () => {
     
-    let arr= ['pickle', 'pop', 'McGullicuddy', 'Sandwich']
+    let arr= ['aged', 'again', 'apple','axe', 'bay' ];
+    // let arr= ['pickle', 'pop', 'McGill','array', 'Sandwich']
     it('... displays a tree', () => {
       arr.forEach( word => trie.insert(word))
       trie.display();
