@@ -1,4 +1,4 @@
-var MinHeap = require('../_Heaps/MinHeap')
+var MinHeap = require('../Heaps/MinHeap')
 var chai = require('chai')
 var expect = chai.expect
 
