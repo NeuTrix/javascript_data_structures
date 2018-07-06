@@ -5,6 +5,7 @@ class TrieNode {
     this.value = value;
     this.parent = parent;
     this.level = level;
+
     this.children = {};
     this.endOfWord = false;
     // color for console highlighting
@@ -31,7 +32,7 @@ class Trie {
       // if not, then create new child node
       } else {
         let newNode = new TrieNode({
-          letter: letter, 
+          value: letter, 
           parent: node.value,
           level: i
         });
@@ -48,25 +49,42 @@ class Trie {
   // determine if a word exists in this Trie
   find(word) {
     word = word.toUpperCase();
-    let wrdArr = word.split('');
+    let wordArray = word.split('');
+    let n = wordArray.length;
     // start at root
     let node = this.rootNode;
     // create string of found letters
     let found = "";
+    let arr = []
+    let failed = console.log(`Failed. The word => ${word} <= was not found. \n Only found ["${found}..."]`)
     // loop through the word; stop if failed
-    for (let i = 0; i < wrdArr.length; i += 1) {
-      let letter = wrdArr[i];
-      let kid = node.children[letter];
-
+    for (let i = 0; i < n; i += 1) {
+      let letter = wordArray[i];
+      let kid = node.children[letter]; // child node
+      let last = wordArray[n-1]
+      // console.log('===>',kid)
+      // if (kid.value === last) {
+      //   console.log('last letter not found')
+      //   return false
+      // }
       if (kid) {
+        // color to highlight found word
+        kid.color = true
         found += letter
         node = (kid)
+        arr.push(node)
       } else {
-        console.log(`Failed. The word => ${word} <= was not found. \n Only found ["${found}..."].`)
+        // kid.color = false
+        console.log(failed)
+        // reset color values to false. Clear for next search
+        arr.forEach(node => node.color = false)
+        this.display()
         return false
       }
     }
-    console.log(`Found the word: "${found}"`)
+    console.log(`Found the word: "${found} ${ this.display()} "`)
+    // reset color values to false. Clear for next search
+    arr.forEach(node => node.color = false)
     return true
   }
 
@@ -141,19 +159,20 @@ class Trie {
       let grands = child.children // grand children of this node
       let names = Object.keys(grands); // keys arr of the object set
       let count = names.length; // number of children for this node
-      let indent = `${" | ".repeat(child.level )}` // level indicator
+      let indent = `${"  | ".repeat(child.level )}` // level indicator
       // Word endings are highlightes with a period ('.').
-      let highlight = chalk.yellow;
+      // let highlight = chalk.yellow;
+      let highlight = chalk.yellow.bold.bgBlack;
       let parentCol = chalk.green;
       if ( child.endOfWord === true) {
-        console.log(`${indent} ${child.color ? highlight(name): (name) } .`)
+        console.log(`${indent}  ${child.color ? highlight(name): (name) } <-+`)
       } else if ( count >= 2) {
         // Parent branches wit more than ond name are visually
         // identified wih an asterisk and inverse color
 
-        console.log(`${indent} ${child.color ? highlight(name): parentCol(name)} -+`)
+        console.log(`${indent}  ${child.color ? highlight(name): parentCol(name)} -+`)
       } else {
-        console.log(`${indent} ${child.color ? highlight(name): name} -+`)
+        console.log(`${indent}  ${child.color ? highlight(name): name} -+`)
       } 
       this.display(child)
     }

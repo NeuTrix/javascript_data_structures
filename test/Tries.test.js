@@ -53,11 +53,23 @@ describe.only('The Trie Class', () => {
       expect(keys[0]).to.eql('M')
     });
 
+    it.only('... has a correct value property', () => {
+      let arr = [ 'test', 'for', 'values']
+      arr.forEach(word => trie.insert(word))
+      let kids = root.children
+      console.log(kids)
+      for (let letter in kids){
+        let value = kids[letter].value
+        console.log(value)
+        expect(value).to.eql(letter)
+      }
+    });
+
   });
 
   describe('... the #display function', () => {
 
-    let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'sand', 'Sandwich', 'zoo', 'xyz', 'daddy']
+    let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'sand', 'Sandwich', 'zoo', 'xyz', 'daddy', 'sandwiches']
     // .join().toLowerCase().split(',').sort();
     let clear;
     beforeEach(() => {
@@ -70,8 +82,26 @@ describe.only('The Trie Class', () => {
     });
 
     it('... can highlight found words', () => {
-      let test = trie.find('sandwhich');
+      let test = trie.find('sandwich');
+      
       expect(test).to.eql(true)
+    });
+
+    it('... can doesn`t highlight for not-found words', () => {
+      let test = trie.find('sandle');
+      expect(test).to.eql(false)
+    });
+
+    it('... can turns off highlight for not-found words', () => {
+      console.log('+++++++++', trie.rootNode)
+      trie.find('pickle');
+      let test = trie.find('sandwich');
+      expect(test).to.eql(true)
+    });
+
+    it('... only finds substrings with proper endpoints', () => {
+      let test = trie.find('sand');
+      expect(test).to.eql(false)
     });
   });
 
