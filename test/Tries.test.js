@@ -8,7 +8,6 @@ describe.only('The Trie Class', () => {
   before(() => {
     trie = new Trie();
     root = trie.rootNode;
-    // console.log(`\n ==> Trie: `, trie,  `\n\n ==> Root: `, root)
   });
 
   afterEach(() => { 
@@ -48,7 +47,7 @@ describe.only('The Trie Class', () => {
 
     it('... transforms the letters into upperCase', () => {
       trie.insert('MIN')
-      
+
       let keys = Object.keys(root.children)
       expect(keys).to.have.lengthOf(1)
       expect(keys[0]).to.eql('M')
@@ -58,24 +57,22 @@ describe.only('The Trie Class', () => {
 
   describe('... the #display function', () => {
 
-    let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'sand', 'Sandwich', 'zoo', 'xyz', 'daddy'].join().toLowerCase().split(',').sort();
-
-    // .join().toUpperCase().sort().split('')
-    it('... displays a tree', () => {
+    let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'sand', 'Sandwich', 'zoo', 'xyz', 'daddy']
+    // .join().toLowerCase().split(',').sort();
+    let clear;
+    beforeEach(() => {
       arr.forEach (word => trie.insert(word))
-      let clear = `${'\n'.repeat(3)}`
-      console.log(clear)
-      console.log(`\n${clear} ${trie.display()}`);
-      // console.log(arr.join().toLowerCase().split(',').sort())
+      clear = `${'\n'.repeat(3)}`;
     });
-    it('makes a yellow string', () => {
-      let yellow = '\x1b[33m%s\x1b[0m'
-      console.log(yellow, `stringToMakeYellow`);
-    });
-  });
 
-  describe('=> The #find function', () => {
-    
+    it('... displays a tree', () => {
+      console.log(`\n${clear} ${trie.display()}`)
+    });
+
+    it('... can highlight found words', () => {
+      let test = trie.find('sandwhich');
+      expect(test).to.eql(true)
+    });
   });
 
 });
