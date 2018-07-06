@@ -1,11 +1,10 @@
-var chalk = require('chalk')
+let chalk = require('chalk')
 
 class TrieNode {
   constructor({level, parent = '', value} = {})  {
     this.value = value;
     this.parent = parent;
     this.level = level;
-
     this.children = {};
     this.endOfWord = false;
     // color for console highlighting
@@ -15,10 +14,10 @@ class TrieNode {
 
 class Trie {
   constructor() {
-    this.rootNode = new TrieNode({value: '*', level: 0});
+    this.rootNode = new TrieNode({ value: '*', level: 0 });
   }
-  // insert a new word into the Trie instance
-  insert(word) {
+  // insert a single string into the Trie instance
+  insertString(word) {
     // clean the data, rest to lower case
     word = word.toUpperCase()
     // set the root node
@@ -42,10 +41,26 @@ class Trie {
       }
     }
     node.endOfWord = true;
-    let message = `\n ==> The word "${word}" was successfully added. \n`
+    let message = `\n ==> The word "${word}" was successfully added. \n`;
+    this.display()
     return message
   }
+  //  Insert an array of strings into the Trie
+  insertArray(arr) {
+    let inserted = [];
 
+    if(arr.length <= 0) {
+      console.error("Error: Can not insert an empty array")
+      return false
+    }
+    arr.sort((a,b) => {return b - a})
+    arr.forEach(word => this.insertString(word))
+  }
+  // Use to flag special cases or search results
+  clearColorFlag(arr){
+    // reset color flag to false. Clear for next search
+    arr.forEach(node => node.color = false)
+  }
   // determine if a word exists in this Trie
   find(word) {
     word = word.toUpperCase();
@@ -56,38 +71,38 @@ class Trie {
     // create string of found letters
     let found = "";
     let arr = []
-    let failed = console.log(`Failed. The word => ${word} <= was not found. \n Only found ["${found}..."]`)
+    let failed = `Failed. The word => ${word} <= was not found in this Trie.`
     // loop through the word; stop if failed
     for (let i = 0; i < n; i += 1) {
       let letter = wordArray[i];
       let kid = node.children[letter]; // child node
       let last = wordArray[n-1]
-      // console.log('===>',kid)
-      // if (kid.value === last) {
-      //   console.log('last letter not found')
-      //   return false
-      // }
-      if (kid) {
-        // color to highlight found word
+      // validates that substring is a full word in Trie
+      if(!kid ) {
+        console.log(failed)
+        return false
+      } else if (kid.value === last && kid.endOfWord == false) {
+        console.log(failed)
+        return false
+      } else if (kid) {
+        // Set color flag to highlight found word
         kid.color = true
         found += letter
         node = (kid)
         arr.push(node)
       } else {
-        // kid.color = false
         console.log(failed)
-        // reset color values to false. Clear for next search
+        // reset color flag to false. Clear for next search
         arr.forEach(node => node.color = false)
         this.display()
         return false
       }
     }
-    console.log(`Found the word: "${found} ${ this.display()} "`)
-    // reset color values to false. Clear for next search
+    console.log(`Found the word: " ${found} "`)
+    this.display()
     arr.forEach(node => node.color = false)
     return true
   }
-
   // remove a word from the Trie instance
   // !! how to remove a substring
   remove(word){
@@ -128,24 +143,17 @@ class Trie {
           // triggers end of while loop if subsegment reached
           if (N.endOfWord){
             subseg = true;
-
-          // console.log(`==>Letters: ${letterStack} \n Nodes: `, nodeStack)
-            
           }
         }
         reset() // reset flags and stacks
         console.log('at end ==>', subseg, letterStack, nodeStack)
       } else {
-        // console.log('------->',kid.children)
         node = kid
       }  
     }
     this.display(this.rootNode)
-    console.log( )
-    
     return true
   }
-
   // provide console display of the entire Trie instance
   display(node= this.rootNode) {
     // !!! not nesting properly in a tree format
