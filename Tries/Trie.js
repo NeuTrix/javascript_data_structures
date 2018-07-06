@@ -167,20 +167,20 @@ class Trie {
       let grands = child.children // grand children of this node
       let names = Object.keys(grands); // keys arr of the object set
       let count = names.length; // number of children for this node
-      let indent = `${"  | ".repeat(child.level )}` // level indicator
+      let indent = `${" | ".repeat(child.level )}` // level indicator
       // Word endings are highlightes with a period ('.').
       // let highlight = chalk.yellow;
       let highlight = chalk.yellow.bold.bgBlack;
       let parentCol = chalk.green;
       if ( child.endOfWord === true) {
-        console.log(`${indent}  ${child.color ? highlight(name): (name) } <-+`)
+        console.log(`${indent} ${child.color ? highlight(name): (name) } ${chalk.red('*')}`)
       } else if ( count >= 2) {
         // Parent branches wit more than ond name are visually
         // identified wih an asterisk and inverse color
 
-        console.log(`${indent}  ${child.color ? highlight(name): parentCol(name)} -+`)
+        console.log(`${indent} ${child.color ? highlight(name): parentCol(name)} -+`)
       } else {
-        console.log(`${indent}  ${child.color ? highlight(name): name} -+`)
+        console.log(`${indent} ${child.color ? highlight(name): name} -+`)
       } 
       this.display(child)
     }
