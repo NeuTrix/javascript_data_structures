@@ -88,7 +88,7 @@ describe('The Trie Class', () => {
 
   describe('... the #display function', () => {
 
-    let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'Sandwich', 'zoo', 'xyz', 'daddy', 'sandwiches']
+    let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'Sandwich', 'zoo', 'xyz', 'daddy','sand', 'sandwiches']
     // .join().toLowerCase().split(',').sort();
     let clear;
     beforeEach(() => {
@@ -117,12 +117,12 @@ describe('The Trie Class', () => {
     });
 
     it('... only finds substrings with proper endpoints', () => {
-      let test = trie.find('sand');
+      let test = trie.find('sound');
       expect(test).to.eql(false)
     });
 
     it('', () => {
-      trie.find("Daddy")
+      trie.find("sand")
     });
   });
 });
