@@ -83,7 +83,7 @@ describe('The Trie Class', () => {
     });
   });
 
-  describe('=> The #find & #display functions', () => {
+  describe.only('=> The #find & #display functions', () => {
 
     let arr = ['dad','aged', 'again', 'arrow', 'daddy', 'sand', 'sandwich',
     ]
@@ -108,23 +108,24 @@ describe('The Trie Class', () => {
       expect(trie.find('san')).to.eql(false)
     });
 
-    it('... can highlight found words with matching first and last letters', () => {
+    it.only('... can highlight found words with matching first and last letters', () => {
       // console.log(trie.rootNode.children['D'].children['A'].children['D'])
-      expect(trie.find('dad')).to.eql(true)
+      expect(trie.find('again')).to.eql(true)
     });
 
     it.only('... can display the parent value of first node', () => {
-      let node = trie.rootNode.children["D"]
-      // let node = trie.rootNode.childten['A']
-      // console.log(node.value)
-      let test = trie.display(node)
+      let node = trie.rootNode
+      // let node = trie.rootNode.children["A"]
+      let test = trie.print(node)
       console.log(test)
-      // expect(test).
+    });
+
+    it('print?', () => {
+      // print()
     });
 
   });
 
   describe('=> The #remove function ', () => {
-    
   });
 });

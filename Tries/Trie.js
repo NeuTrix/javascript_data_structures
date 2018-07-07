@@ -89,7 +89,8 @@ class Trie {
       } 
     }
     console.log(`Found the word: " ${found} "`)
-    this.display()
+    // this.display()
+    this.print(arr[0])
     arr.forEach(node => {
       node.color = false;
       // return console.log(node)
@@ -147,27 +148,29 @@ class Trie {
     this.display(this.rootNode)
     return true
   }
-  // provide console display of the entire Trie instance
+  // recursively display all children for a node
   display(node= this.rootNode) {
     // !!! not nesting properly in a tree format
     if(!node) {
       return console.error(("Error: There are no nodes in this Trie"))
     }
     let children = node.children; // children objects for this node
-    console.log('====>',node)
+    // console.log(chalk.cyan('====>Node: '),node)
+    // console.log(chalk.yellow('====>Kids: '),children)
+    // console.log(chalk.grey(node.value))
     for (let name in children) {
       let child = children[name]; // single child obj for this node
       let grands = child.children // grand children of this node
       let names = Object.keys(grands); // keys arr of the object set
-      console.log(chalk.red(names))
       let count = names.length; // number of children for this node
-      let indent = `${chalk.grey("| ").repeat(child.level )}` // level indicator
+      let indent = `${chalk.grey(" | ").repeat(child.level )}` // level indicator
+      // let indent = `${chalk.grey(child.value)} ${chalk.grey("| ").repeat(child.level )}` // level indicator
       // Word endings are highlightes with a period ('.').
       // let highlight = chalk.yellow;
       let highlight = chalk.yellow.bold.bgBlack;
       let parentCol = chalk.green;
       if ( child.endOfWord === true) {
-        console.log(`${indent}${
+        console.log(`${indent} ${
           child.color ? 
           highlight(name): 
           (name) 
@@ -175,13 +178,12 @@ class Trie {
       } else if ( count >= 2) {
         // Parent branches wit more than ond name are visually
         // identified wih an asterisk and inverse color
-
-        console.log(`${indent}${
+        console.log(`${indent} ${
           child.color ? 
           highlight(name): parentCol(name)
         } ${chalk.grey('-+')}`)
       } else {
-        console.log(`${indent}${
+        console.log(`${indent} ${
           child.color ? 
           highlight(name): 
           name} ${chalk.grey('-+')}`)
@@ -189,6 +191,13 @@ class Trie {
       this.display(child)
     }
   }
+// print node value and display it's children, recursively
+  print(node) {
+    let highlight = chalk.yellow.bold.bgBlack; // refactor
+    console.log(` ${highlight(node.value)}`)
+    return this.display(node)
+  }
 }
+
 
 module.exports = Trie
