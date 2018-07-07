@@ -85,7 +85,7 @@ describe('The Trie Class', () => {
 
   describe.only('=> The #find & #display functions', () => {
 
-    let arr = ['dad','aged', 'again', 'arrow', 'daddy', 'sand', 'sandwich',
+    let arr = ['dad','age','aged','agedness','agile', 'again', 'arrow', 'daddy', 'sand', 'sandwich',
     ]
     .join().toLowerCase().split(',').sort();
     let clear;
@@ -110,10 +110,10 @@ describe('The Trie Class', () => {
 
     it.only('... can highlight found words with matching first and last letters', () => {
       // console.log(trie.rootNode.children['D'].children['A'].children['D'])
-      expect(trie.find('again')).to.eql(true)
+      expect(trie.find('agedness')).to.eql(true)
     });
 
-    it.only('... can display the parent value of first node', () => {
+    it('... can display the parent value of first node', () => {
       let node = trie.rootNode
       // let node = trie.rootNode.children["A"]
       let test = trie.print(node)
