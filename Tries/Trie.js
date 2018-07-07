@@ -62,48 +62,38 @@ class Trie {
   }
   // determine if a word exists in this Trie
   find(word) {
-    word = word.toUpperCase();
-    let wordArray = word.split('');
-    let n = wordArray.length;
-    // start at root
-    let node = this.rootNode;
-    // create string of found letters
-    let found = "";
-    let arr = []
-    let failed = `Failed. The word => ${word} <= was not found in this Trie.`
+    word = word.toUpperCase(); // normalize data
+    let wordArray = word.split(''); // processing arr of search term
+    let n = wordArray.length; // shorthand
+    let node = this.rootNode; // start at root
+    let found = ""; // create string of found letters
+    let arr = [] // to hold nodes for post processing (reset)
+    let failed = `Failed. The word =>${word}<= not found.` // msg 
     // loop through the word; stop if failed
     for (let i = 0; i < n; i += 1) {
-      let letter = wordArray[ i ];
-      let nd = chalk.bold.yellow.bgBlack.inverse
-      console.log(nd(letter))
-      let kid = node.children[ letter ]; // child node
-      console.log(nd)
-      let last = wordArray[ n - 1 ]
+      let letter = wordArray[ i ]; // single char for search
+      let kid = node.children[ letter ]; // capture child node
       // validates that substring is a full word in Trie
       if(!kid) {
-        console.log(failed)
+        console.log(failed) // produce error message
         return false
         // verify that last letter is end of word
-      } else if ( i === n-1 && kid.endOfWord == false) {
-        console.log(failed)
+      } else if ( i === n - 1 && kid.endOfWord == false) {
+        console.log(failed) 
         return false
-      } else if (kid) {
-        // Set color flag to highlight found word
-        kid.color = true
-        found += letter
-        node = (kid)
-        arr.push(node)
       } else {
-        console.log(failed)
-        // reset color flag to false. Clear for next search
-        arr.forEach(node => node.color = false)
-        this.display()
-        return false
-      }
+        kid.color = true; // Set color flag to highlight found word
+        found += letter; // add the letter to the return string
+        node = (kid); // point to the new node header in the chain
+        arr.push(node) // push the node into the arr for resetting
+      } 
     }
     console.log(`Found the word: " ${found} "`)
     this.display()
-    arr.forEach(node => node.color = false)
+    arr.forEach(node => {
+      node.color = false;
+      // return console.log(node)
+    })
     return true
   }
   // remove a word from the Trie instance
@@ -164,11 +154,12 @@ class Trie {
       return console.error(("Error: There are no nodes in this Trie"))
     }
     let children = node.children; // children objects for this node
-
+    console.log('====>',node)
     for (let name in children) {
       let child = children[name]; // single child obj for this node
       let grands = child.children // grand children of this node
       let names = Object.keys(grands); // keys arr of the object set
+      console.log(chalk.red(names))
       let count = names.length; // number of children for this node
       let indent = `${chalk.grey("| ").repeat(child.level )}` // level indicator
       // Word endings are highlightes with a period ('.').

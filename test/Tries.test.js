@@ -83,7 +83,7 @@ describe('The Trie Class', () => {
     });
   });
 
-  describe('... the #display function', () => {
+  describe('=> The #find & #display functions', () => {
 
     let arr = ['dad','aged', 'again', 'arrow', 'daddy', 'sand', 'sandwich',
     ]
@@ -104,14 +104,27 @@ describe('The Trie Class', () => {
       expect(test).to.eql(true)
     });
 
-    it('... only finds substrings with proper endpoints', () => {
-      expect(trie.find('sound')).to.eql(false)
+    it('...finds substrings with proper endpoints', () => {
+      expect(trie.find('san')).to.eql(false)
     });
 
-  it.only('... can highlight found words with matching first and last letters', () => {
-    // console.log(trie.rootNode.children['D'].children['A'].children['D'])
-    expect(trie.find('dad')).to.eql(true)
+    it('... can highlight found words with matching first and last letters', () => {
+      // console.log(trie.rootNode.children['D'].children['A'].children['D'])
+      expect(trie.find('dad')).to.eql(true)
+    });
+
+    it.only('... can display the parent value of first node', () => {
+      let node = trie.rootNode.children["D"]
+      // let node = trie.rootNode.childten['A']
+      // console.log(node.value)
+      let test = trie.display(node)
+      console.log(test)
+      // expect(test).
+    });
+
   });
 
+  describe('=> The #remove function ', () => {
+    
   });
 });
