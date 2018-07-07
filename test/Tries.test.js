@@ -57,10 +57,8 @@ describe('The Trie Class', () => {
       let arr = [ 'test', 'for', 'values']
       arr.forEach(word => trie.insertString(word))
       let kids = root.children
-      console.log(kids)
       for (let letter in kids){
         let value = kids[letter].value
-        console.log(value)
         expect(value).to.eql(letter)
       }
     });
@@ -70,59 +68,50 @@ describe('The Trie Class', () => {
   describe('=> The #insertArray method ...', () =>{
 
     it('... can add a new Node', () => {
-      let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'Sandwich', 'zoo', 'xyz', 'daddy', 'sandwiches']
+      let arr = ['aged', 'again', 'arrow', 'borrow','zoo', 'xyz', 'daddy']
       let before = Object.keys(root.children)
       trie.insertArray(arr);
       let after = Object.keys(root.children);
       expect(before).to.have.lengthOf(0)
-      expect(after).to.have.lengthOf(8)
+      expect(after).to.have.lengthOf(5)
     });
 
     it('... rejects an empty array', () => {
       let arr = []
       let test = trie.insertArray(arr)
-      console.log(test)
       expect(test).to.eql(false)
     });
   });
 
   describe('... the #display function', () => {
 
-    let arr = ['aged', 'again', 'arrow', 'borrow', 'mango', 'apple', 'axe', 'bay', 'pickle', 'pop', 'McGill', 'array', 'Sandwich', 'zoo', 'xyz', 'daddy','sand', 'sandwiches']
-    // .join().toLowerCase().split(',').sort();
+    let arr = ['dad','aged', 'again', 'arrow', 'daddy', 'sand', 'sandwich',
+    ]
+    .join().toLowerCase().split(',').sort();
     let clear;
     beforeEach(() => {
       arr.forEach (word => trie.insertString(word))
       clear = `${'\n'.repeat(3)}`;
     });
 
-    it('... displays a tree', () => {
+    xit('... displays a tree', () => {
       console.log(`\n${clear} ${trie.display()}`)
     });
 
-    it('... can highlight found words', () => {
-      let test = trie.find('sandwich');
-      expect(test).to.eql(true)
-    });
-
-    it('... display doesn`t highlight not-found words', () => {
-      let test = trie.find('sanle');
-      expect(test).to.eql(false)
-    });
-
-    it('... can turns off highlight for not-found words', () => {
+    it('... can turn off highlight for not-found words', () => {
       trie.find('pickle');
       let test = trie.find('sandwich');
       expect(test).to.eql(true)
     });
 
     it('... only finds substrings with proper endpoints', () => {
-      let test = trie.find('sound');
-      expect(test).to.eql(false)
+      expect(trie.find('sound')).to.eql(false)
     });
 
-    it('', () => {
-      trie.find("sand")
-    });
+  it.only('... can highlight found words with matching first and last letters', () => {
+    // console.log(trie.rootNode.children['D'].children['A'].children['D'])
+    expect(trie.find('dad')).to.eql(true)
+  });
+
   });
 });

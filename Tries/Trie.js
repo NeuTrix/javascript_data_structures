@@ -42,7 +42,6 @@ class Trie {
     }
     node.endOfWord = true;
     let message = `\n ==> The word "${word}" was successfully added. \n`;
-    this.display()
     return message
   }
   //  Insert an array of strings into the Trie
@@ -74,14 +73,18 @@ class Trie {
     let failed = `Failed. The word => ${word} <= was not found in this Trie.`
     // loop through the word; stop if failed
     for (let i = 0; i < n; i += 1) {
-      let letter = wordArray[i];
-      let kid = node.children[letter]; // child node
-      let last = wordArray[n-1]
+      let letter = wordArray[ i ];
+      let nd = chalk.bold.yellow.bgBlack.inverse
+      console.log(nd(letter))
+      let kid = node.children[ letter ]; // child node
+      console.log(nd)
+      let last = wordArray[ n - 1 ]
       // validates that substring is a full word in Trie
-      if(!kid ) {
+      if(!kid) {
         console.log(failed)
         return false
-      } else if (kid.value === last && kid.endOfWord == false) {
+        // verify that last letter is end of word
+      } else if ( i === n-1 && kid.endOfWord == false) {
         console.log(failed)
         return false
       } else if (kid) {
