@@ -192,9 +192,9 @@ class Trie {
     }
   }
 // print node value and display it's children, recursively
-  print(node) {
+  print(node = this.rootNode) { // set default node
     let highlight = chalk.yellow.bold.bgBlack; // refactor
-    console.log(` ${highlight(node.value)}`)
+    console.log(`${highlight(node.value)}`)
     return this.display(node)
   }
 }
