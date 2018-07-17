@@ -1,13 +1,14 @@
 var chai = require('chai')
 var expect = chai.expect;
-var TreeNode = require ('../Tree-Node')
+var TreeNode = require ('../TreeNode')
 
-describe.only('The Node Based tree', () => {
+describe('The Node Based tree', () => {
 
   let options = {
-    leftChild: 900,
+    key: '10',
+    left: 900,
     data: "jim",
-    rightChil: 700,
+    right: 700,
   }
   let node = new TreeNode(options)
 
@@ -15,19 +16,31 @@ describe.only('The Node Based tree', () => {
     expect(node instanceof TreeNode).to.eql(true)
   });
     
-  it('... has a data property', () => {
-    expect(node).to.have.property('data')
-  });
-  it('... has a leftChild property', () => {
-    expect(node).to.have.property('leftChild')
-  });
-  it('... has a rightChild property', () => {
-    expect(node).to.have.property('rightChild')
+  it('... has a key property', () => {
+    expect(node).to.have.property('key')
+      .to.eql(options.key)
   });
 
-  it.only('... has the correct left child', () => {
-    expect(node.leftChild).to.eql(900)
+  it('... has a data property', () => {
+    expect(node).to.have.property('data')
+      .to.eql(options.data)
   });
+
+  it('... has a left (child) property', () => {
+    expect(node).to.have.property('left')
+      .to.eql(options.left)
+  });
+
+  it('... has a right (child) property', () => {
+    expect(node).to.have.property('right')
+      .to.eql(options.right)
+  });
+
+  it('... can show it`s data', () => {
+    expect(node.show).to.eql(true)
+  });
+
+  
 
 
 
