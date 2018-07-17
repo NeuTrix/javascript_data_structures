@@ -75,5 +75,5 @@ class Tree {
 
 // get root
 
-module.exports = Tree
+module.exports = { Tree }
 

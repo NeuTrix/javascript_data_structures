@@ -1,6 +1,6 @@
-var chai = require('chai');
-var expect = chai.expect
-var Tree = require('../Tree');
+let chai = require('chai');
+let expect = chai.expect
+let Tree = require('../Tree');
 
 describe('The Tree module', () => {
   let tree
