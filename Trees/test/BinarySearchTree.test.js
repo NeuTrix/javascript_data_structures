@@ -57,9 +57,10 @@ describe.only('The Binary Search Tree', () => {
         .to.eql(arr[11]);
     });
 
-    it('... properly inserts right side items', () => {
+    it.only('... properly inserts right side items', () => {
       
-      bst.print()
+        bst.print()
+
     });
 
   });

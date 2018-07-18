@@ -20,7 +20,7 @@ class BinarySearchTree {
         this.insert(data, parent.right)
       } else {
         parent.right = new Node(data)
-        console.log(parent)
+        // console.log(parent)
       }
     }
     
@@ -44,7 +44,22 @@ class BinarySearchTree {
 
 
   print(node = this.root) {
-    console.log(this.root)
+    if(node) {
+      console.log(node)
+    } 
+    
+    if (node.left) {
+      console.log(chalk.cyan(`|${node.data}|==|R|==>`))
+      console.log(chalk.cyan(`<==|L|==|${node.data}|`))
+      this.print(node.left)
+    } 
+    
+    if (node.right) {
+      console.log(chalk.cyan(`==|R|==|${node.data}|==>`))
+      this.print(node.right)
+    } 
+    
+    return
   }
 }
 
