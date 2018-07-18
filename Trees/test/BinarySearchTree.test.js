@@ -14,18 +14,17 @@ describe.only('The Binary Search Tree', () => {
       expect(bst instanceof BinarySearchTree).to.eql(true);
     });
 
-    it('... the `#show` getter returns the tree array', () => {
-      expect(bst).has.property('show');
-      expect(bst.show instanceof Array).to.eql(true);
-    });
-
   });
 
-  describe.only('=> the #insert method', () => {
+  describe('=> the #insert method', () => {
     let bst = new BinarySearchTree();
     let proto = Object.getPrototypeOf(bst)
     let methods = Object.getOwnPropertyNames(proto)
-    let arr = [7, 5, 10, 3, 6, 9, 12, 1, 4, 8, null, 11, 14]
+    let arr = [7, 5, 10, 3, 6, 9, 12, 1, 4, 8, 11, 14]
+
+    arr.forEach(data => {
+      return bst.insert(data)
+    })
 
     it('... has an insert method', () => {
       // console.log(methods)
@@ -36,9 +35,18 @@ describe.only('The Binary Search Tree', () => {
       expect(bst.insert).to.be.a('function')
     });
 
-    it.only('... creates the proper root node', () => {
-      expect(bst.root.data).to.eql(arr[0])
+    it('... creates the proper root node', () => {
+      expect(bst.root.data).to.eql(100)
     });
+
+    it('... properly inserts right side items', () => {
+      
+      bst.print()
+    });
+
+  });
+
+  describe('+> the #print function', () => {
 
   });
 

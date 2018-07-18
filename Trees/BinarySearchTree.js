@@ -3,17 +3,24 @@ let chalk = require('chalk');
 
 class BinarySearchTree {
    constructor() {
-    this.tree = []; // data structure for the tree
-    this.root = new Node(); 
+    this.root = new Node();
    }
 
-  insert({data, parent = this.root} = {}) {
+  insert(data, parent = this.root) {
     
-    if (parent.data === null) {
+    if (this.root.data === null) {
+      this.root.data = data;
+      console.log(chalk.cyan(`Created root of value: ${this.root.data}`))
+    } 
+     
+    // let lookRight = data > parent.data;
 
-    }
-
-
+    // if (lookRight) {
+    //   if(parent.right) {
+    //     insert (node, this.tree[parent.right])
+    //   }
+    // }
+    
   }
 
 
@@ -33,10 +40,9 @@ class BinarySearchTree {
 
 
 
-  get show() {
-    return this.tree
+  print(node = this.root) {
+    console.log(this.root)
   }
-
 }
 
 // module.exports = { BinarySearchTree as default}
