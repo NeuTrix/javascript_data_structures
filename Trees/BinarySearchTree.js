@@ -9,20 +9,30 @@ class BinarySearchTree {
   insert(data, parent = this.root) {
     
     if (this.root.data === null) {
-      this.root.data = data;
+      this.root.data = data
       console.log(chalk.cyan(`Created root of value: ${this.root.data}`))
-    } 
-     
-    let bigger = data > parent.data;
-
-    if (bigger) {
-      if(parent.right) {
-        this.insert(data, parent.right)
+    } else {
+      
+      
+      let bigger = data > parent.data;
+      
+      if (bigger) {
+        if(parent.right) {
+          this.insert(data, parent.right)
+        } else {
+          parent.right = new Node(data)
+        }
       } else {
-        parent.right = new Node(data)
-        // console.log(parent)
+        
+        if (parent.left) {
+          this.insert(data, parent.left)
+        } else {
+          parent.left = new Node(data)
+        }
       }
     }
+    
+    
     
   }
 
@@ -44,20 +54,21 @@ class BinarySearchTree {
 
 
   print(node = this.root) {
-    if(node) {
-      console.log(node)
-    } 
+    if(node.data) {
+      // console.log(node)
+      console.log(`${node.left ? chalk.yellow(node.left.data) : '***'} <=(L)= ${chalk.cyan(node.data)} =(R)=> ${node.right ? chalk.green(node.right.data):'***'}`)
+    } else {
+      console.log(`${'++'.repeat(15)}`)
+    }
     
     if (node.left) {
-      console.log(chalk.cyan(`|${node.data}|==|R|==>`))
-      console.log(chalk.cyan(`<==|L|==|${node.data}|`))
       this.print(node.left)
     } 
     
     if (node.right) {
-      console.log(chalk.cyan(`==|R|==|${node.data}|==>`))
       this.print(node.right)
     } 
+    // console.log(node)
     
     return
   }
