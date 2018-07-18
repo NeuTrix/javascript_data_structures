@@ -13,13 +13,16 @@ class BinarySearchTree {
       console.log(chalk.cyan(`Created root of value: ${this.root.data}`))
     } 
      
-    // let lookRight = data > parent.data;
+    let bigger = data > parent.data;
 
-    // if (lookRight) {
-    //   if(parent.right) {
-    //     insert (node, this.tree[parent.right])
-    //   }
-    // }
+    if (bigger) {
+      if(parent.right) {
+        this.insert(data, parent.right)
+      } else {
+        parent.right = new Node(data)
+        console.log(parent)
+      }
+    }
     
   }
 
