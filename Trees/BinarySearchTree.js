@@ -12,10 +12,7 @@ class BinarySearchTree {
       this.root.data = data
       console.log(chalk.cyan(`Created root of value: ${this.root.data}`))
     } else {
-      
-      
       let bigger = data > parent.data;
-      
       if (bigger) {
         if(parent.right) {
           this.insert(data, parent.right)
@@ -23,7 +20,6 @@ class BinarySearchTree {
           parent.right = new Node(data)
         }
       } else {
-        
         if (parent.left) {
           this.insert(data, parent.left)
         } else {
@@ -73,9 +69,9 @@ class BinarySearchTree {
     return output
   }
 
-  breadthOrder() {
+  breadthOrder(node = this.root) {
     let output = [];
-    let current = this.root;
+    let current = node;
     let queue =[current];
 
     while(queue.length > 0) {
@@ -87,17 +83,23 @@ class BinarySearchTree {
     return output
   }
 
-  getMin(node) {
-    if (node) {
-      // console.log(node)
-      this.getMin(node.left)
-      return node
-    } 
+  getMin(node = this.root) {
+    while(node.left) { 
+      node = node.left
+    }
+    return node
   }
+// buggy execution
+  // getMin(node = this.root) {
+  //   if(node.left) {
+  //     console.log(node)
+  //     return node
+  //   }
+  //   this.getMin(node.left)
+  // }
   
-  print(array) {
+  print(array= this.breadthOrder()) {
     // create a default array of bfs search to show
-    // the current tree
     array.forEach( node => {
       let root = node.data;
       let left = node.left;
@@ -105,9 +107,8 @@ class BinarySearchTree {
       !left && !right 
       ? console.log(`* node ${chalk.green(`[${node.data}] =>\t* LEAF *`)}  `)
       : console.log(`* node [${node.data}]:\t(L) => ${left ? left.data : chalk.red('*')}\t(R) => ${ right ? right.data : chalk.yellow('* null *')}`)
-
-      
     })
+    return array
   }
 
 
