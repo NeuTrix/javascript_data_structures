@@ -35,22 +35,41 @@ class BinarySearchTree {
     
     
   }
-
-
-  //  ==== Traversal ====
-
+  // === TRAVERSAL ===
   // In-Order
+  inOrder(node = this.root) {
+    let output = [];
+    const recurse = (node) => {
+      if (node) {
+        recurse(node.left)
+        output.push(node.data)
+        recurse(node.right)
+      }
+    }
+    recurse(node)
+    return output
+  }
 
-  // Pre-Order
-
-  // Post-Order
+    getMin(node) {
+      if (node) {
+        // console.log(node)
+        this.getMin(node.left)
+        return node
+      } 
+    }
+  
 
   // rebalance
 
   // depth first search (DFS)
 
   // breadth first search (BFS)
+  // higher order fn to print results to console
+  show(func) {
+      let printout = []
 
+      func
+    }
 
 
   print(node = this.root) {
