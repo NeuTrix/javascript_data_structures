@@ -31,25 +31,22 @@ class BinarySearchTree {
         }
       }
     }
-    
-    
-    
   }
   // === TRAVERSAL ===
-  // In-Order
+  // InOrder (left, root, right)
   inOrder(node = this.root) {
     let output = [];
     const recurse = (node) => {
       if (node) {
         recurse(node.left) 
-        output.push(node.data)
+        output.push(node)
         recurse(node.right)
       }
     }
     recurse(node)
     return output
   }
-  
+  // PreOrder (root, left, right)
   preOrder(node = this.root) {
     let output = [];
     const recurse = (node) => {
@@ -62,16 +59,39 @@ class BinarySearchTree {
     recurse(node)
     return output
   }
-
-
-    getMin(node) {
+  // PostOrder (left, right, root)
+  postOrder(node = this.root) {
+    let output = [];
+    const recurse = (node) => {
       if (node) {
-        // console.log(node)
-        this.getMin(node.left)
-        return node
-      } 
+        recurse(node.left) 
+        recurse(node.right)
+        output.push(node.data)
+      }
     }
+    recurse(node)
+    return output
+  }
+
+  getMin(node) {
+    if (node) {
+      // console.log(node)
+      this.getMin(node.left)
+      return node
+    } 
+  }
   
+  print(array) {
+    array.forEach( node => {
+      let root = node.data;
+      let left = node.left;
+      let right = node.right;
+      console.log(`* Node [${node.data}] :\tLeft => ${ left ? left.data : null }\tRight => ${ right ? right.data : null}`)
+      
+    })
+  }
+
+
 
   // rebalance
 
@@ -79,32 +99,26 @@ class BinarySearchTree {
 
   // breadth first search (BFS)
   // higher order fn to print results to console
-  show(func) {
-      let printout = []
 
-      func
-    }
-
-
-  show(node = this.root) {
-    if(node.data) {
-      // console.log(node)
-      console.log(`${node.left ? chalk.yellow(node.left.data) : '***'} <=(L)= ${chalk.cyan(node.data)} =(R)=> ${node.right ? chalk.green(node.right.data):'***'}`)
-    } else {
-      console.log(`${'++'.repeat(15)}`)
-    }
+  // show(node = this.root) {
+  //   if(node.data) {
+  //     // console.log(node)
+  //     console.log(`${node.left ? chalk.yellow(node.left.data) : '***'} <=(L)= ${chalk.cyan(node.data)} =(R)=> ${node.right ? chalk.green(node.right.data):'***'}`)
+  //   } else {
+  //     console.log(`${'++'.repeat(15)}`)
+  //   }
     
-    if (node.left) {
-      this.show(node.left)
-    } 
+  //   if (node.left) {
+  //     this.show(node.left)
+  //   } 
     
-    if (node.right) {
-      this.show(node.right)
-    } 
-    // console.log(node)
+  //   if (node.right) {
+  //     this.show(node.right)
+  //   } 
+  //   // console.log(node)
     
-    return
-  }
+  //   return
+  // }
 }
 
 // module.exports = { BinarySearchTree as default}

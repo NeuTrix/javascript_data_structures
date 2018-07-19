@@ -3,7 +3,7 @@ let chai = require('chai');
 let expect = chai.expect;
 let chalk = require('chalk');
 
-describe('The Binary Search Tree', () => {
+describe.only('The Binary Search Tree', () => {
 
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
@@ -13,7 +13,7 @@ describe('The Binary Search Tree', () => {
   arr.forEach(data => {
     return bst.insert(data)
   })
-  describe('... Creating a new tree', () => {
+  describe('=> The #new function', () => {
     let bst = new BinarySearchTree()
     
     it('... creates an instance of BST', () => {
@@ -61,48 +61,49 @@ describe('The Binary Search Tree', () => {
     it('... root correct R grands', () => {
       expect(bst.root.right.right.data) // l:2
         .to.eql(arr[6]);
-    });
+    }); 
    
     it('... root correct R great grands', () => {
       expect(bst.root.right.right.right.data) //l:3
         .to.eql(arr[11]);
     });
+  });
 
-    it('... shows a tree', () =>   {
-        bst.show()
+  describe('=> The #print method', () => {
+    it.only('... prints a tree', () => {
+      // console.log(bst)
+      let traversal = bst.inOrder()
+      let test = bst.print(traversal);
+      expect(test).to.be.an('array')
     });
-
   });
 
   describe('=> the #inOrder traversal method', () => {
-    let sorted = [1,3,4,5,6,7,8,9,10,11,12,14]
+    let inSorted = [1,3,4,5,6,7,8,9,10,11,12,14]
     let test = bst.inOrder()
-    it.only('... returns an ordered array', () => {
+    it('... returns an ordered array', () => {
       expect(test).be.an('array')
-        .to.eql(sorted)
+        .to.eql(inSorted)
     });
   });
 
   describe('=> the #preOrder traversal method', () => {
-    let sorted = [7,5,3,1,4,6,10,9,8,12,11,14]
+    let preSorted = [7,5,3,1,4,6,10,9,8,12,11,14]
     let test = bst.preOrder()
     it('... returns an ordered array', () => {
       expect(test).be.an('array')
-        .to.eql(sorted)
+        .to.eql(preSorted)
     });
   });
-  /* describe.only('=> the #postOrder traversal method', () => {
-    let sorted = [1,4,3,6,5,8,9,11,14,12,10,7]
-    let test = bst.preOrder()
-    console.log(test)
+
+  describe('=> the #postOrder traversal method', () => {
+    let postSorted = [1,4,3,6,5,8,9,11,14,12,10,7]
+    let test = bst.postOrder()
     it('... returns an ordered array', () => {
       expect(test).be.an('array')
-        .to.eql(sorted)
+        .to.eql(postSorted)
     });
-  }); */
-
-  
-  
+  });
 
   describe('=> #getMin method', () => {
     let branch = bst.root.right
