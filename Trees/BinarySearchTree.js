@@ -41,7 +41,7 @@ class BinarySearchTree {
     let output = [];
     const recurse = (node) => {
       if (node) {
-        recurse(node.left)
+        recurse(node.left) 
         output.push(node.data)
         recurse(node.right)
       }
@@ -49,6 +49,20 @@ class BinarySearchTree {
     recurse(node)
     return output
   }
+  
+  preOrder(node = this.root) {
+    let output = [];
+    const recurse = (node) => {
+      if (node) {
+        output.push(node.data)
+        recurse(node.left) 
+        recurse(node.right)
+      }
+    }
+    recurse(node)
+    return output
+  }
+
 
     getMin(node) {
       if (node) {
@@ -72,7 +86,7 @@ class BinarySearchTree {
     }
 
 
-  print(node = this.root) {
+  show(node = this.root) {
     if(node.data) {
       // console.log(node)
       console.log(`${node.left ? chalk.yellow(node.left.data) : '***'} <=(L)= ${chalk.cyan(node.data)} =(R)=> ${node.right ? chalk.green(node.right.data):'***'}`)
@@ -81,11 +95,11 @@ class BinarySearchTree {
     }
     
     if (node.left) {
-      this.print(node.left)
+      this.show(node.left)
     } 
     
     if (node.right) {
-      this.print(node.right)
+      this.show(node.right)
     } 
     // console.log(node)
     

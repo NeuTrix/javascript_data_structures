@@ -3,7 +3,7 @@ let chai = require('chai');
 let expect = chai.expect;
 let chalk = require('chalk');
 
-describe.only('The Binary Search Tree', () => {
+describe('The Binary Search Tree', () => {
 
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
@@ -68,33 +68,51 @@ describe.only('The Binary Search Tree', () => {
         .to.eql(arr[11]);
     });
 
-    it('... prints a tree', () =>   {
-        bst.print()
+    it('... shows a tree', () =>   {
+        bst.show()
     });
 
   });
 
-  xdescribe('=> the #inOrder traversal method', () => {
-    let sorted = [ 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14 ].toString()
-    console.log(sorted)
-    it('... returns an ordered array', () => {
-      expect(bst.inOrder()).to.eql(sorted)
-    });
-  });
-
-  describe.only('=> #getMin method', () => {
-    let branch = bst.root.right
-    let test2 = bst.outOrder()
+  describe('=> the #inOrder traversal method', () => {
+    let sorted = [1,3,4,5,6,7,8,9,10,11,12,14]
     let test = bst.inOrder()
-    console.log('==>',test)
-    console.log('xxx>',test2)
+    it.only('... returns an ordered array', () => {
+      expect(test).be.an('array')
+        .to.eql(sorted)
+    });
+  });
+
+  describe('=> the #preOrder traversal method', () => {
+    let sorted = [7,5,3,1,4,6,10,9,8,12,11,14]
+    let test = bst.preOrder()
+    it('... returns an ordered array', () => {
+      expect(test).be.an('array')
+        .to.eql(sorted)
+    });
+  });
+  /* describe.only('=> the #postOrder traversal method', () => {
+    let sorted = [1,4,3,6,5,8,9,11,14,12,10,7]
+    let test = bst.preOrder()
+    console.log(test)
+    it('... returns an ordered array', () => {
+      expect(test).be.an('array')
+        .to.eql(sorted)
+    });
+  }); */
+
+  
+  
+
+  describe('=> #getMin method', () => {
+    let branch = bst.root.right
     // let result = bst.getMin(root)
 
     it('... confirming search on root`s Right branch', () => {
       expect(branch.data).to.eql(arr[2]) // confirm branch
     });
 
-    it.only('... returns the min node in the branch', () => {
+    it('... returns the min node in the branch', () => {
       let search = bst.getMin(branch)// node
       // console.log(branch.left)
       // expect(search.data).to.eql(arr[9])
