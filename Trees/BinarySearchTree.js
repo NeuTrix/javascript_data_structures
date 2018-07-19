@@ -78,6 +78,12 @@ class BinarySearchTree {
     let current = this.root;
     let queue =[current];
 
+    while(queue.length > 0) {
+      let peek = queue[0];
+      peek.left && queue.push(peek.left) 
+      peek.right && queue.push(peek.right) 
+      output.push(queue.shift())
+    }
     return output
   }
 

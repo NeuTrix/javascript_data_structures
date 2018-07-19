@@ -106,11 +106,11 @@ describe.only('The Binary Search Tree', () => {
     });
   });
 
-  describe.only('=> the #breadthOrder traversal method', () => {
+  describe('=> the #breadthOrder traversal method', () => {
     let breadthSorted = [7,5,10,3,6,9,12,1,4,8,11,14]
+    let broad = bst.breadthOrder()
     let test = []
-    bst.breadthOrder().forEach(node => test.push(node.data))
-    
+    broad.forEach(node => test.push(node.data))
     it('... the method exists', () => {
       expect(bst).to.have.property('breadthOrder')
         .to.be.a('function')
