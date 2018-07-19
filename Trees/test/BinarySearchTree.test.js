@@ -8,7 +8,7 @@ describe.only('The Binary Search Tree', () => {
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
   let methods = Object.getOwnPropertyNames(proto)
-  let arr = [7, 5, 10, 3, 6, 9, 12, 1, 4, 8, 11, 14]
+  let arr = [7,5,10,3,6,9,12,1,4,8,11,14]
 
   arr.forEach(data => {
     return bst.insert(data)
@@ -69,18 +69,17 @@ describe.only('The Binary Search Tree', () => {
     });
   });
 
-  describe('=> The #print method', () => {
-    it.only('... prints a tree', () => {
-      // console.log(bst)
+  describe('=> The #print method shows in console:', () => {
+    it('... prints a tree', () => {
       let traversal = bst.inOrder()
       let test = bst.print(traversal);
-      expect(test).to.be.an('array')
     });
   });
 
   describe('=> the #inOrder traversal method', () => {
     let inSorted = [1,3,4,5,6,7,8,9,10,11,12,14]
-    let test = bst.inOrder()
+    let test = []
+    bst.inOrder().forEach(node => test.push(node.data))
     it('... returns an ordered array', () => {
       expect(test).be.an('array')
         .to.eql(inSorted)
@@ -89,7 +88,8 @@ describe.only('The Binary Search Tree', () => {
 
   describe('=> the #preOrder traversal method', () => {
     let preSorted = [7,5,3,1,4,6,10,9,8,12,11,14]
-    let test = bst.preOrder()
+    let test = []
+    bst.preOrder().forEach(node => test.push(node.data))
     it('... returns an ordered array', () => {
       expect(test).be.an('array')
         .to.eql(preSorted)
@@ -98,10 +98,27 @@ describe.only('The Binary Search Tree', () => {
 
   describe('=> the #postOrder traversal method', () => {
     let postSorted = [1,4,3,6,5,8,9,11,14,12,10,7]
-    let test = bst.postOrder()
+    let test = []
+    bst.postOrder().forEach(node => test.push(node.data))
     it('... returns an ordered array', () => {
       expect(test).be.an('array')
         .to.eql(postSorted)
+    });
+  });
+
+  describe.only('=> the #breadthOrder traversal method', () => {
+    let breadthSorted = [7,5,10,3,6,9,12,1,4,8,11,14]
+    let test = []
+    bst.breadthOrder().forEach(node => test.push(node.data))
+    
+    it('... the method exists', () => {
+      expect(bst).to.have.property('breadthOrder')
+        .to.be.a('function')
+    });
+    
+    it('... returns an ordered array', () => {
+      expect(test).be.an('array')
+        .to.eql(breadthSorted)
     });
   });
 

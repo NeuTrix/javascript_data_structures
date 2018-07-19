@@ -51,7 +51,7 @@ class BinarySearchTree {
     let output = [];
     const recurse = (node) => {
       if (node) {
-        output.push(node.data)
+        output.push(node)
         recurse(node.left) 
         recurse(node.right)
       }
@@ -66,10 +66,18 @@ class BinarySearchTree {
       if (node) {
         recurse(node.left) 
         recurse(node.right)
-        output.push(node.data)
+        output.push(node)
       }
     }
     recurse(node)
+    return output
+  }
+
+  breadthOrder() {
+    let output = [];
+    let current = this.root;
+    let queue =[current];
+
     return output
   }
 
