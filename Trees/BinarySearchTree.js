@@ -82,11 +82,16 @@ class BinarySearchTree {
   }
   
   print(array) {
+    // create a default array of bfs search to show
+    // the current tree
     array.forEach( node => {
       let root = node.data;
       let left = node.left;
       let right = node.right;
-      console.log(`* Node [${node.data}] :\tLeft => ${ left ? left.data : null }\tRight => ${ right ? right.data : null}`)
+      !left && !right 
+      ? console.log(`* node ${chalk.green(`[${node.data}] =>\t* LEAF *`)}  `)
+      : console.log(`* node [${node.data}]:\t(L) => ${left ? left.data : chalk.red('*')}\t(R) => ${ right ? right.data : chalk.yellow('* null *')}`)
+
       
     })
   }
