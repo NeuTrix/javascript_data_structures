@@ -3,7 +3,7 @@ let chai = require('chai');
 let expect = chai.expect;
 let chalk = require('chalk');
 
-describe('The Binary Search Tree', () => {
+describe.only('The Binary Search Tree', () => {
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
   let methods = Object.getOwnPropertyNames(proto)
@@ -94,25 +94,33 @@ describe('The Binary Search Tree', () => {
   describe('=> #getMin method', () => {
     // let branch = bst.root.right
     it('... confirming search on root`s Right branch', () => {
-      expect(bst.getMin().data).to.eql(arr[7]) // confirm branch
+      expect(bst.getMin().data).to.eql(Math.min(...arr)) // confirm branch
     });
   });
-  xdescribe('=> #getMax method', () => {
+  describe('=> #getMax method', () => {
     // let branch = bst.root.right
     it('... confirming search on root`s Right branch', () => {
-      expect(bst.getMax().data).to.eql(arr[7]) // confirm branch
+      expect(bst.getMax().data).to.eql(Math.max(...arr)) // confirm branch
+    });
+  });
+  describe.only('=> the #remove method', () => {
+    
+    it('... can remove a leaf element', () => {
+      let leaf = bst.getMax()
+      bst.print()
+      expect(leaf.data).to.eql(12)
     });
   });
 });
 
-describe('The BST #print method', () => {
+xdescribe('The BST #print method', () => {
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
   let methods = Object.getOwnPropertyNames(proto)
   let arr = [7, 5, 10, 3, 6, 9, 12, 1, 4, 8, 11, 14]
   arr.forEach(data => bst.insert(data))
 
-  describe.only('=> prints a breadthOrder tree by default', () => {
+  describe('=> prints a breadthOrder tree by default', () => {
     let test = bst.breadthOrder().map( n => n.data)
     it('... breadthOrder', () => {
       bst.print()

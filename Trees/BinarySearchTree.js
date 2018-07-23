@@ -6,6 +6,7 @@ class BinarySearchTree {
     this.root = new Node();
    }
 
+  // CRUD operations
   insert(data, parent = this.root) {
     
     if (this.root.data === null) {
@@ -28,6 +29,12 @@ class BinarySearchTree {
       }
     }
   }
+
+  remove(data, parent = this.root) {
+    // find
+  }
+
+
   // === TRAVERSAL ===
   // InOrder (left, root, right)
   inOrder(node = this.root) {
@@ -85,10 +92,18 @@ class BinarySearchTree {
 
   getMin(node = this.root) {
     while(node.left) { 
-      node = node.left
+      node = node.left;
     }
     return node
   }
+
+  getMax(node = this.root) {
+    while(node.right) {
+      node = node.right;
+    }
+    return node
+  }
+
 // buggy execution
   // getMin(node = this.root) {
   //   if(node.left) {
@@ -110,36 +125,7 @@ class BinarySearchTree {
     })
     return array
   }
-
-
-
   // rebalance
-
-  // depth first search (DFS)
-
-  // breadth first search (BFS)
-  // higher order fn to print results to console
-
-  // show(node = this.root) {
-  //   if(node.data) {
-  //     // console.log(node)
-  //     console.log(`${node.left ? chalk.yellow(node.left.data) : '***'} <=(L)= ${chalk.cyan(node.data)} =(R)=> ${node.right ? chalk.green(node.right.data):'***'}`)
-  //   } else {
-  //     console.log(`${'++'.repeat(15)}`)
-  //   }
-    
-  //   if (node.left) {
-  //     this.show(node.left)
-  //   } 
-    
-  //   if (node.right) {
-  //     this.show(node.right)
-  //   } 
-  //   // console.log(node)
-    
-  //   return
-  // }
 }
 
-// module.exports = { BinarySearchTree as default}
 module.exports = BinarySearchTree
