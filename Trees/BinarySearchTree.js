@@ -7,26 +7,19 @@ class BinarySearchTree {
    }
 
   // CRUD operations
-  insert(data, parent = this.root) {
-    
-    if (this.root.data === null) {
-      this.root.data = data
-      console.log(chalk.cyan(`Created root of value: ${this.root.data}`))
-    } else {
-      let bigger = data > parent.data;
-      if (bigger) {
-        if(parent.right) {
-          this.insert(data, parent.right)
-        } else {
-          parent.right = new Node(data)
-        }
-      } else {
-        if (parent.left) {
-          this.insert(data, parent.left)
-        } else {
-          parent.left = new Node(data)
-        }
-      }
+  insert(data, node = this.root) {
+    if (node.data === null) {
+      return node.data = data;
+    } 
+    if (data >= node.data) {
+      return !node.right 
+        ? node.right = new Node(data) 
+        : this.insert(data, node.right) 
+    } 
+    if (data < node.data) {
+      return !node.left 
+        ? node.left = new Node(data)
+        : this.insert(data, node.left)
     }
   }
 
@@ -78,8 +71,7 @@ class BinarySearchTree {
 
   breadthOrder(node = this.root) {
     let output = [];
-    let current = node;
-    let queue =[current];
+    let queue =[node];
 
     while(queue.length > 0) {
       let peek = queue[0];
@@ -93,6 +85,7 @@ class BinarySearchTree {
   getMin(node = this.root) {
     while(node.left) { 
       node = node.left;
+      // return this.getMin(node.left)
     }
     return node
   }

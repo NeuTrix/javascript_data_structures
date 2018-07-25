@@ -3,7 +3,7 @@ let chai = require('chai');
 let expect = chai.expect;
 let chalk = require('chalk');
 
-describe.only('The Binary Search Tree', () => {
+describe('The Binary Search Tree', () => {
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
   let methods = Object.getOwnPropertyNames(proto)
@@ -91,24 +91,27 @@ describe.only('The Binary Search Tree', () => {
         .to.eql(breadthSorted)
     });
   });
+
   describe('=> #getMin method', () => {
     // let branch = bst.root.right
     it('... confirming search on root`s Right branch', () => {
       expect(bst.getMin().data).to.eql(Math.min(...arr)) // confirm branch
     });
   });
+
   describe('=> #getMax method', () => {
     // let branch = bst.root.right
     it('... confirming search on root`s Right branch', () => {
       expect(bst.getMax().data).to.eql(Math.max(...arr)) // confirm branch
     });
   });
-  describe.only('=> the #remove method', () => {
+
+  describe('=> the #remove method', () => {
     
     it('... can remove a leaf element', () => {
       let leaf = bst.getMax()
       bst.print()
-      expect(leaf.data).to.eql(12)
+      expect(leaf.data).to.eql(14)
     });
   });
 });
@@ -152,3 +155,5 @@ xdescribe('The BST #print method', () => {
     });
   });
 });
+
+describe
