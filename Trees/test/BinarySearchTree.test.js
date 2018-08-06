@@ -3,12 +3,15 @@ let chai = require('chai');
 let expect = chai.expect;
 let chalk = require('chalk');
 
-describe('The Binary Search Tree', () => {
+describe.only('The Binary Search Tree', () => {
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
   let methods = Object.getOwnPropertyNames(proto)
   let arr = [7,5,10,3,6,9,12,1,4,8,11,14]
-  arr.forEach(data => bst.insert(data))
+  let args = arr.map( num => num = { data: num })
+  console.log(args)
+
+args.forEach(data => bst.insert(data))
 
   describe('=> The #new function', () => {
     let bst = new BinarySearchTree()
@@ -60,7 +63,6 @@ describe('The Binary Search Tree', () => {
       expect(test).be.an('array').to.eql(inSorted)
     });
   });
-
   describe('=> the #preOrder traversal method', () => {
     let preSorted = [7,5,3,1,4,6,10,9,8,12,11,14]
     let test = bst.preOrder().map(n => n.data)
@@ -69,7 +71,6 @@ describe('The Binary Search Tree', () => {
         .to.eql(preSorted)
     });
   });
-
   describe('=> the #postOrder traversal method', () => {
     let postSorted = [1,4,3,6,5,8,9,11,14,12,10,7]
     let test = bst.postOrder().map(n => n.data)
@@ -78,7 +79,6 @@ describe('The Binary Search Tree', () => {
         .to.eql(postSorted)
     });
   });
-
   describe('=> the #breadthOrder traversal method', () => {
     let breadthSorted = [7,5,10,3,6,9,12,1,4,8,11,14]
     let test = bst.breadthOrder().map(n => n.data)
@@ -91,32 +91,22 @@ describe('The Binary Search Tree', () => {
         .to.eql(breadthSorted)
     });
   });
-
   describe('=> #getMin method', () => {
     // let branch = bst.root.right
     it('... confirming search on root`s Right branch', () => {
       expect(bst.getMin().data).to.eql(Math.min(...arr)) // confirm branch
     });
   });
-
   describe('=> #getMax method', () => {
     // let branch = bst.root.right
     it('... confirming search on root`s Right branch', () => {
       expect(bst.getMax().data).to.eql(Math.max(...arr)) // confirm branch
     });
   });
-
-  describe('=> the #remove method', () => {
-    
-    it('... can remove a leaf element', () => {
-      let leaf = bst.getMax()
-      bst.print()
-      expect(leaf.data).to.eql(14)
-    });
-  });
+  
 });
 
-xdescribe('The BST #print method', () => {
+describe.only('The BST #print method', () => {
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
   let methods = Object.getOwnPropertyNames(proto)
@@ -156,4 +146,14 @@ xdescribe('The BST #print method', () => {
   });
 });
 
-describe
+xdescribe('=> the #remove method', () => {
+  let bst = new BinarySearchTree();
+  let arr = [7, 5, 10, 3, 6, 9, 12, 1, 4, 8, 11, 14]
+
+  arr.forEach(data => bst.insert(data))
+  it('... can remove a leaf element', () => {
+    let leaf = bst.getMax()
+    bst.print()
+    expect(leaf.data).to.eql(14)
+  });
+});

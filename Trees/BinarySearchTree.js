@@ -24,12 +24,14 @@ class BinarySearchTree {
   }
 
   remove(data, parent = this.root) {
-    // find
+    // 1- leaf/root node
+
+
   }
 
 
   // === TRAVERSAL ===
-  // InOrder (left, root, right)
+  // InOrder (left, root, right)  Returns an array
   inOrder(node = this.root) {
     let output = [];
     const recurse = (node) => {
@@ -42,7 +44,7 @@ class BinarySearchTree {
     recurse(node)
     return output
   }
-  // PreOrder (root, left, right)
+  // PreOrder (root, left, right)  Returns an array
   preOrder(node = this.root) {
     let output = [];
     const recurse = (node) => {
@@ -55,7 +57,7 @@ class BinarySearchTree {
     recurse(node)
     return output
   }
-  // PostOrder (left, right, root)
+  // PostOrder (left, right, root). Returns an array
   postOrder(node = this.root) {
     let output = [];
     const recurse = (node) => {
@@ -68,7 +70,6 @@ class BinarySearchTree {
     recurse(node)
     return output
   }
-
   breadthOrder(node = this.root) {
     let output = [];
     let queue =[node];
@@ -81,7 +82,7 @@ class BinarySearchTree {
     }
     return output
   }
-
+  //  === Search ===
   getMin(node = this.root) {
     while(node.left) { 
       node = node.left;
@@ -97,15 +98,7 @@ class BinarySearchTree {
     return node
   }
 
-// buggy execution
-  // getMin(node = this.root) {
-  //   if(node.left) {
-  //     console.log(node)
-  //     return node
-  //   }
-  //   this.getMin(node.left)
-  // }
-  
+  // === Printing ===  
   print(array= this.breadthOrder()) {
     // create a default array of bfs search to show
     array.forEach( node => {
