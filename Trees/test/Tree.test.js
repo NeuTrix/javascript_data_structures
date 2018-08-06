@@ -1,6 +1,6 @@
 let chai = require('chai');
 let expect = chai.expect
-let Tree = require('../Tree');
+let Tree = require('../ArrayTree');
 
 xdescribe('The Tree module', () => {
   let tree
@@ -58,7 +58,7 @@ xdescribe('The Tree module', () => {
     });
   });
 
-  describe('==> Transforming the Tree', () => {
+  describe('==> Adding to the Tree', () => {
      let tree
 
      beforeEach(() => {
@@ -96,6 +96,20 @@ xdescribe('The Tree module', () => {
     describe('... Traversing the', () => {
 
     });
+  });
+
+  describe('==> Removing from the Tree', () => {
+    
+    // ? has NO kids, 
+    // - if root, then set root to null
+    // - if a just leaf, then point parent to curr node
+    // ? has ONE child ?
+    // - set node (n) to a temp (t)
+    // - have parent (p) point grand/child (c) and null ptr (n)
+    // - null (n) pointer to (c)
+    // - (n) now has no parent or children
+    // ? has TWO kids ?
+
   });
 
 });

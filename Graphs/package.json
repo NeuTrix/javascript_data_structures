@@ -1,0 +1,14 @@
+{
+  "name": "graphs",
+  "version": "1.0.0",
+  "description": "Javascript data structures and algorithms for Graphs",
+  "main": "basicGraph.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "author": "",
+  "license": "MIT"
+}

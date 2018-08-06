@@ -1,0 +1,40 @@
+Arguments: 
+  /usr/local/Cellar/node/9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js add mocha chai
+
+PATH: 
+  /usr/local/bin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:~/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.7.1
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "graphs",
+    "version": "1.0.0",
+    "description": "Javascript data structures and algorithms for Graphs",
+    "main": "basicGraph.js",
+    "directories": {
+      "test": "test"
+    },
+    "scripts": {
+      "test": "mocha -w"
+    },
+    "author": "",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:67:26)
