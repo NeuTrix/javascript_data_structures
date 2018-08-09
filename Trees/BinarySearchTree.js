@@ -4,6 +4,7 @@ let chalk = require('chalk');
 class BinarySearchTree {
    constructor() {
     this.root = new Node();
+    this.nodes = 0;
    }
 
   // CRUD operations

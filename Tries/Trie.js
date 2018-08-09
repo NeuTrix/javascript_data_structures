@@ -25,7 +25,7 @@ class Trie {
     // build the children in root node
     for (let i = 0; i < word.length; i += 1) {
       let letter = word[i];
-      // determine if node already exist and reset node if so
+      // determine if node already exisxt and reset node if so
       if(node.children[letter]) {
         node = node.children[letter]
       // if not, then create new child node

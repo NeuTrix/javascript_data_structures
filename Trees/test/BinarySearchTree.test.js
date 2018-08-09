@@ -3,15 +3,12 @@ let chai = require('chai');
 let expect = chai.expect;
 let chalk = require('chalk');
 
-describe.only('The Binary Search Tree', () => {
+describe('The Binary Search Tree', () => {
   let bst = new BinarySearchTree();
-  let proto = Object.getPrototypeOf(bst)
+  let proto = Object.getPrototypeOf(bst);
   let methods = Object.getOwnPropertyNames(proto)
   let arr = [7,5,10,3,6,9,12,1,4,8,11,14]
-  let args = arr.map( num => num = { data: num })
-  console.log(args)
-
-args.forEach(data => bst.insert(data))
+  arr.forEach(data => bst.insert(data))
 
   describe('=> The #new function', () => {
     let bst = new BinarySearchTree()
@@ -106,7 +103,7 @@ args.forEach(data => bst.insert(data))
   
 });
 
-describe.only('The BST #print method', () => {
+xdescribe('The BST #print method', () => {
   let bst = new BinarySearchTree();
   let proto = Object.getPrototypeOf(bst)
   let methods = Object.getOwnPropertyNames(proto)
@@ -146,7 +143,11 @@ describe.only('The BST #print method', () => {
   });
 });
 
-xdescribe('=> the #remove method', () => {
+// find
+
+// count
+
+describe.only('=> the #remove method', () => {
   let bst = new BinarySearchTree();
   let arr = [7, 5, 10, 3, 6, 9, 12, 1, 4, 8, 11, 14]
 

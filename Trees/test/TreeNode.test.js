@@ -2,13 +2,11 @@ var chai = require('chai');
 var expect = chai.expect;
 var TreeNode = require ('../TreeNode');
 
-describe.only('The Node Based tree', () => {
+describe('The TreeNode class', () => {
 
-  let args = {
-    data: 1000
-  }
+  let data = 1000;
 
-  let node = new TreeNode(args);
+  let node = new TreeNode(data);
 
   it('... can create a new node', () => {
     expect(node instanceof TreeNode).to.eql(true)
@@ -19,9 +17,9 @@ describe.only('The Node Based tree', () => {
       .to.eql(data)
   });
 
-  it('... has a parnet property', () => {
+  it('... has a parent property', () => {
     expect(node).to.have.property('parent')
-      .to.eql()
+    .to.eql(null)
   });
 
   it('... has a left (child) property', () => {
