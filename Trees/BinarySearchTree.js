@@ -115,34 +115,66 @@ class BinarySearchTree {
   //   return array
   // }
 
-  printNew() {
+  printTree() {
     // create a queue for left children and a stack for right children
     let leftQueue = [];
     let rightStack =[];
     let node = this.root // set initial node
-    let printOrder = [node]; // init array for printing- full node values
-    let count = 0
+    let printOrder = [node]; // init node array for printing- full node values
+    let printData = [node.data]
+    let depth = 0
+    // let depthLeft = 0
+    // let depthRight = 0
     // set while loop condition to non empty stacks, do once
     do {
       let left = node.left;
       let right = node.right;
-      count++
+      // track tree depth for printing
+
       if (left) { // capture any left children
         leftQueue.push(left)
+        depthLeft++
       }
       if (right) { // capture any right children
         rightStack.push(right)
+        depthRight++
+      }
+      if (!leftQueue.length) {
+        depthLeft--
       }
       // reset the node, checking left first, then right
-      leftQueue.length ? node = leftQueue.shift() : node = rightStack.pop()
+      if (leftQueue.length) {
+        node = leftQueue.shift() 
+        // console.log('===>',depthLeft)
+        // printData.push('*'.repeat(depthLeft)+node.data)
+        printData.push(`${' - |'.repeat(depthLeft)} ${node.data} |`)
+      } else {
+        node = rightStack.pop()
+        // depthRight--
+        console.log('xxx>',depthRight, node.data, printData)
+        printData.push(`${' - |'.repeat(depthRight)} ${node.data} |`)
+      }
+      if (!rightStack.length) {
+        depthRight--
+      }
+      
+      // if
+
       // populate the printing array
       printOrder.push(node)
       // break if node is a leaf and the queue andstack are empty
     } while ( (node.right || node.left) || (leftQueue.length || rightStack.length)) 
     
     // pretty print the arra data via forEach
-    
-    console.log('passed through: ', count++)
+    // printOrder.forEach
+
+    // console.log('=====>', printData)
+    printData.forEach(node => console.log(node))
+    let test = printOrder.map(node => {
+      // console.log(node.data)
+      return node.data
+    })
+    console.log(test)
     // return the data array
     return printOrder
   }
