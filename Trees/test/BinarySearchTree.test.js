@@ -9,6 +9,7 @@ describe('The Binary Search Tree', () => {
   let methods = Object.getOwnPropertyNames(proto)
   let arr = [7,5,10,3,6,9,12,1,4,8,11,14]
   arr.forEach(data => bst.insert(data))
+  console.log( bst)
 
   describe('=> The #new function', () => {
     let bst = new BinarySearchTree()
@@ -16,6 +17,7 @@ describe('The Binary Search Tree', () => {
       expect(bst instanceof BinarySearchTree).to.eql(true);
     });
   });
+
   describe('=> the #insert method', () => {
     it('... has an insert method', () => {
       // console.log(methods)
@@ -53,6 +55,7 @@ describe('The Binary Search Tree', () => {
         .to.eql(arr[11]);
     });
   });
+
   describe('=> the #inOrder traversal method', () => {
     let inSorted = [1,3,4,5,6,7,8,9,10,11,12,14]
     let test = bst.inOrder().map(n => n.data)
@@ -60,6 +63,7 @@ describe('The Binary Search Tree', () => {
       expect(test).be.an('array').to.eql(inSorted)
     });
   });
+
   describe('=> the #preOrder traversal method', () => {
     let preSorted = [7,5,3,1,4,6,10,9,8,12,11,14]
     let test = bst.preOrder().map(n => n.data)
@@ -68,6 +72,7 @@ describe('The Binary Search Tree', () => {
         .to.eql(preSorted)
     });
   });
+
   describe('=> the #postOrder traversal method', () => {
     let postSorted = [1,4,3,6,5,8,9,11,14,12,10,7]
     let test = bst.postOrder().map(n => n.data)
@@ -76,6 +81,7 @@ describe('The Binary Search Tree', () => {
         .to.eql(postSorted)
     });
   });
+
   describe('=> the #breadthOrder traversal method', () => {
     let breadthSorted = [7,5,10,3,6,9,12,1,4,8,11,14]
     let test = bst.breadthOrder().map(n => n.data)
@@ -88,12 +94,14 @@ describe('The Binary Search Tree', () => {
         .to.eql(breadthSorted)
     });
   });
+
   describe('=> #getMin method', () => {
     // let branch = bst.root.right
     it('... confirming search on root`s Right branch', () => {
       expect(bst.getMin().data).to.eql(Math.min(...arr)) // confirm branch
     });
   });
+
   describe('=> #getMax method', () => {
     // let branch = bst.root.right
     it('... confirming search on root`s Right branch', () => {
@@ -143,11 +151,36 @@ xdescribe('The BST #print method', () => {
   });
 });
 
+describe.only('revised print', () => {
+  let arr = [10,6,15,5,8,13,18,4,7,9,16,20,17]
+  let printOut = [10,6,5,4,8,7,9,15,13,18,16,17,20]
+  let bst = new BinarySearchTree();
+  arr.forEach(item => bst.insert(item))
+  // arr.forEach(x => console.log('+++', x, "+++"))
+  console.log('==>', bst)
+  let test = bst.printNew()
+  let data = [];
+  test.forEach(node => {
+    data.push(node.data)
+  })
+  console.log('--> data: ', data)
+
+  it('... returns an array', () => {
+    expect(test).to.be.an('array')
+  });
+
+  it('... returns the expect data from node array', () => {
+    expect(data).to.eql(printOut)
+  });
+
+
+});
+
 // find
 
 // count
 
-describe.only('=> the #remove method', () => {
+xdescribe('=> the #remove method', () => {
   let bst = new BinarySearchTree();
   let arr = [7, 5, 10, 3, 6, 9, 12, 1, 4, 8, 11, 14]
 
@@ -157,4 +190,16 @@ describe.only('=> the #remove method', () => {
     bst.print()
     expect(leaf.data).to.eql(14)
   });
+});
+
+describe('=> the #rotateLeft method', () => {
+   let bst = new BinarySearchTree();
+   let arr = [7, 5, 10, 3, 6, 9, 12, 1, 4, 8, 11, 14]
+
+   arr.forEach(data => bst.insert(data))
+   it('... can remove a leaf element', () => {
+     let leaf = bst.getMax()
+     bst.print()
+     expect(leaf.data).to.eql(14)
+   });
 });
