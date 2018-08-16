@@ -106,7 +106,7 @@ class BinarySearchTree {
     // intialize the data
     let node = this.root // set initial node
     let depth = 1 // current depth of node
-    let printData = [node.data] // data and char array for printing  !!!
+    let printData = [node.data+' ---+'] // data and char array for printing  !!!
 
     // let printOrder = [node] // init root node and depth level
     // set while loop condition to non empty stacks, do once
@@ -129,13 +129,17 @@ class BinarySearchTree {
         node = tuplete[0]; // reset the node 
         depth = tuplete[1]; // reset the depth
       } else if (rightStack.length) {
-         let tuplete = rightStack.shift()
+         let tuplete = rightStack.pop()
          node = tuplete[0]; // reset the node 
          depth = tuplete[1]; // reset the depth
-        }
-
+      }
+      // adjust for data print length
+      let logline 
+      // if (!left )
+        node.data.toString().length < 2
+        ? logline = `${'  | '.repeat(depth - 1)}  ${node.data} --+`
+        : logline = `${' - '.repeat(depth - 1)}  ${node.data} |`
       // populate the printing array
-      let logline = `${' - |'.repeat(depth - 1)} ${node.data} |`
       printData.push(logline)
 
     } while ( (node.right || node.left) || (leftQueue.length || rightStack.length)) 
