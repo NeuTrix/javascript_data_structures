@@ -106,14 +106,19 @@ class BinarySearchTree {
     // intialize the data
     let node = this.root // set initial node
     let depth = 1 // current depth of node
-    let printData = [node.data+' ---+'] // data and char array for printing  !!!
+
+    let init
+    node.data.toString().length > 1
+      ? init = chalk.cyan( `${node.data} -+ root`)
+      : init = chalk.cyan( `${node.data}  -+`)
+    // let init = `${chalk red ('hi')}`
+    let printData = [init] // data and char array for printing  !!!
 
     // let printOrder = [node] // init root node and depth level
     // set while loop condition to non empty stacks, do once
     do {
       let left = node.left;
       let right = node.right;
-      // console.log('---: ', node, left, right)
 
       // populate data with node's children
       if (left) {
@@ -122,8 +127,8 @@ class BinarySearchTree {
       if (right) {
         rightStack.push([right, depth + 1]) // default depth for root node
       }
-      // reset node and depth
 
+      // reset node and depth
       if (leftQueue.length) {
         let tuplete = leftQueue.shift()
         node = tuplete[0]; // reset the node 
@@ -135,9 +140,12 @@ class BinarySearchTree {
       }
       // adjust for data print length
       let logline 
-      // if (!left )
+      // adjust for leafs
+      if (!left ) {
+        
+      }
         node.data.toString().length < 2
-        ? logline = `${'  | '.repeat(depth - 1)}  ${node.data} --+`
+        ? logline = `${' | '.repeat(depth - 1)} ${node.data} -+`
         : logline = `${' - '.repeat(depth - 1)}  ${node.data} |`
       // populate the printing array
       printData.push(logline)
