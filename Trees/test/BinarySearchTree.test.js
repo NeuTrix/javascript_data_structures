@@ -167,7 +167,7 @@ describe.only('=> The new #printTree function', () => {
     expect(test).to.be.an('array')
   });
   
-  it('... returns the expect data from node array', () => {
+  xit('... returns the expect data from node array', () => {
     let printOut = [10,6,5,4,8,7,9,15,13,18,16,17,20]
     expect(data).to.eql(printOut)
   });

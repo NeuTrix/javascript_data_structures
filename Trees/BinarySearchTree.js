@@ -96,73 +96,48 @@ class BinarySearchTree {
     return node
   }
 
-  // === Printing ===  
-  //!!! refactort this for clarity and better printing
-  // print(array= this.breadthOrder()) {
-  //   // create a default array of bfs search to show
-  //   array.forEach( node => {
-  //     let root = node.data;
-  //     let left = node.left;
-  //     let right = node.right;
-  //     !left && !right // if this is  leaf node
-  //       ? console.log(`* node ${chalk.green(`[${root}] =>\t* LEAF *`)}  `)
-  //       : console.log(`* node [${root}]:\t(L) is ${left // print left
-  //         ? left.data // print left data if there
-  //         : chalk.red('*')}\t(R) is ${ right // show a marker if no left data
-  //           ? right.data //
-  //           : chalk.yellow('* null *')}`)
-  //   })
-  //   return array
-  // }
 
   printTree() {
-    // create a queue for left children and a stack for right children
-    let leftQueue = [];
-    let rightStack =[];
+    // create queue and stack tuples with node for key and tree depth for values
+    // will facilitate printing an ascii tree
+    let leftQueue = []// map of left children
+    let rightStack = [] // map of right children
+
+    // intialize the data
     let node = this.root // set initial node
-    let printOrder = [node]; // init node array for printing- full node values
-    let printData = [node.data]
-    let depth = 0
-    // let depthLeft = 0
-    // let depthRight = 0
+    let depth = 1 // current depth of node
+    let printData = [node.data] // data and char array for printing  !!!
+
+    // let printOrder = [node] // init root node and depth level
     // set while loop condition to non empty stacks, do once
     do {
       let left = node.left;
       let right = node.right;
-      // track tree depth for printing
+      // console.log('---: ', node, left, right)
 
-      if (left) { // capture any left children
-        leftQueue.push(left)
-        depthLeft++
+      // populate data with node's children
+      if (left) {
+        leftQueue.push([left, depth + 1]) // default depth for root node
       }
-      if (right) { // capture any right children
-        rightStack.push(right)
-        depthRight++
+      if (right) {
+        rightStack.push([right, depth + 1]) // default depth for root node
       }
-      if (!leftQueue.length) {
-        depthLeft--
-      }
-      // reset the node, checking left first, then right
+      // reset node and depth
+
       if (leftQueue.length) {
-        node = leftQueue.shift() 
-        // console.log('===>',depthLeft)
-        // printData.push('*'.repeat(depthLeft)+node.data)
-        printData.push(`${' - |'.repeat(depthLeft)} ${node.data} |`)
-      } else {
-        node = rightStack.pop()
-        // depthRight--
-        console.log('xxx>',depthRight, node.data, printData)
-        printData.push(`${' - |'.repeat(depthRight)} ${node.data} |`)
-      }
-      if (!rightStack.length) {
-        depthRight--
-      }
-      
-      // if
+        let tuplete = leftQueue.shift()
+        node = tuplete[0]; // reset the node 
+        depth = tuplete[1]; // reset the depth
+      } else if (rightStack.length) {
+         let tuplete = rightStack.shift()
+         node = tuplete[0]; // reset the node 
+         depth = tuplete[1]; // reset the depth
+        }
 
       // populate the printing array
-      printOrder.push(node)
-      // break if node is a leaf and the queue andstack are empty
+      let logline = `${' - |'.repeat(depth - 1)} ${node.data} |`
+      printData.push(logline)
+
     } while ( (node.right || node.left) || (leftQueue.length || rightStack.length)) 
     
     // pretty print the arra data via forEach
@@ -170,13 +145,13 @@ class BinarySearchTree {
 
     // console.log('=====>', printData)
     printData.forEach(node => console.log(node))
-    let test = printOrder.map(node => {
-      // console.log(node.data)
-      return node.data
-    })
-    console.log(test)
+    
+    // console.log(test)
     // return the data array
-    return printOrder
+    // console.log('PD==>', printData)
+    // console.log('RS==>', rightStack)
+    // console.log('LQ==>', leftQueue)
+    return printData
   }
 
 
