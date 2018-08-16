@@ -81,6 +81,7 @@ class BinarySearchTree {
     return output
   }
   //  === Search ===
+  // find the minimum element in the tree
   getMin(node = this.root) {
     while(node.left) { 
       node = node.left;
@@ -88,7 +89,7 @@ class BinarySearchTree {
     }
     return node
   }
-
+  //
   getMax(node = this.root) {
     while(node.right) {
       node = node.right;

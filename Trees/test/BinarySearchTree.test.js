@@ -9,7 +9,6 @@ describe('The Binary Search Tree', () => {
   let methods = Object.getOwnPropertyNames(proto)
   let arr = [7,5,10,3,6,9,12,1,4,8,11,14]
   arr.forEach(data => bst.insert(data))
-  bst.printTree()
 
   describe('=> The #new function', () => {
     let bst = new BinarySearchTree()
@@ -157,6 +156,8 @@ describe('=> The new #printTree function', () => {
   let arr = [10,6,15,5,8,13,18,4,7,9,16,20,17]
   arr.forEach(item => bst.insert(item))
   let raw = bst.printTree()
+  // bst.printTree()
+  // console.log(bst)
   // produce data array for comparison
   let data = [];
   raw.forEach(node => {
@@ -174,19 +175,6 @@ describe('=> The new #printTree function', () => {
 
 });
 
-describe.only('=> Test', () => {
-  let bst = new BinarySearchTree();
-  // set initial array for tree
-  let arr = [11,6,15,5,8,13,18,4,7,9,16,20,174,3,6,5,1,33,27, 16,]
-  arr.forEach(item => bst.insert(item))
-  console.log("*".repeat(50))
-  let raw = bst.printTree()
-  // produce data array for comparison
-  let data = [];
-  raw.forEach(node => {
-    data.push(node.data)
-  })
-  });
 
 // find
 
