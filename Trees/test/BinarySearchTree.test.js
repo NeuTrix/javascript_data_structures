@@ -174,6 +174,20 @@ describe('=> The new #printTree function', () => {
 
 });
 
+describe.only('=> Test', () => {
+  let bst = new BinarySearchTree();
+  // set initial array for tree
+  let arr = [11,6,15,5,8,13,18,4,7,9,16,20,174,3,6,5,1,33,27, 16,]
+  arr.forEach(item => bst.insert(item))
+  console.log("*".repeat(50))
+  let raw = bst.printTree()
+  // produce data array for comparison
+  let data = [];
+  raw.forEach(node => {
+    data.push(node.data)
+  })
+  });
+
 // find
 
 // count
