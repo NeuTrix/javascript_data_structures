@@ -96,30 +96,23 @@ class BinarySearchTree {
     return node
   }
 
-
   printTree() {
     // create queue and stack tuples with node for key and tree depth for values
-    // will facilitate printing an ascii tree
     let leftQueue = []// map of left children
     let rightStack = [] // map of right children
 
     // intialize the data
-    let node = this.root // set initial node
-    let depth = 1 // current depth of node
+    let node = this.root; // set initial node
+    let depth = 1; // current depth of node
+    let rawData = []; // capture raw node sequence. Init with root node
+    // initialize print object
+    let printData = [chalk.yellow.dim.bold(`Binary Search Tree :\n`)] 
 
-    let init
-    node.data.toString().length > 1
-      ? init = chalk.cyan( `${node.data} -+ root`)
-      : init = chalk.cyan( `${node.data}  -+`)
-    // let init = `${chalk red ('hi')}`
-    let printData = [init] // data and char array for printing  !!!
-
-    // let printOrder = [node] // init root node and depth level
-    // set while loop condition to non empty stacks, do once
+    // iterate over nodes
     do {
-      let left = node.left;
-      let right = node.right;
-
+      rawData.push(node)
+      let left = node.left; // current left-chlld
+      let right = node.right; // current right-child
       // populate data with node's children
       if (left) {
         leftQueue.push([left, depth + 1]) // default depth for root node
@@ -127,48 +120,59 @@ class BinarySearchTree {
       if (right) {
         rightStack.push([right, depth + 1]) // default depth for root node
       }
-
-      // reset node and depth
-      if (leftQueue.length) {
+      
+      // account for leafs and adjust print layout for length of data
+      let logline 
+      if (!left && !right) {
+        node.data.toString().length < 2
+        ? logline = chalk.green(`${chalk.grey(' |  '.repeat(depth - 1))}${node.data}${chalk.green.dim(' *')}`)
+        : logline = chalk.green(`${chalk.grey(' |  '.repeat(depth - 1))} ${node.data}${chalk.green.dim(' *')}`) 
+      } else { // for non leaf nodes
+        node.data.toString().length < 2
+        ? logline = `${chalk.grey(' |  '.repeat(depth - 1))} ${node.data} ${chalk.grey('-+')}`
+        : logline = `${chalk.grey(' |  '.repeat(depth - 1))}  ${node.data} ${chalk.grey('-+')}`
+      }
+      // reset node and depth variables for next node
+      if (leftQueue.length) { // left child operations
         let tuplete = leftQueue.shift()
         node = tuplete[0]; // reset the node 
         depth = tuplete[1]; // reset the depth
-      } else if (rightStack.length) {
-         let tuplete = rightStack.pop()
-         node = tuplete[0]; // reset the node 
-         depth = tuplete[1]; // reset the depth
+      } else if (rightStack.length) { //right child operations
+        let tuplete = rightStack.pop()
+        node = tuplete[0]; // reset the node 
+        depth = tuplete[1]; // reset the depth
       }
-      // adjust for data print length
-      let logline 
-      // adjust for leafs
-      if (!left ) {
-        
-      }
-        node.data.toString().length < 2
-        ? logline = `${' | '.repeat(depth - 1)} ${node.data} -+`
-        : logline = `${' - '.repeat(depth - 1)}  ${node.data} |`
       // populate the printing array
       printData.push(logline)
-
+      // validate final node ...
     } while ( (node.right || node.left) || (leftQueue.length || rightStack.length)) 
     
-    // pretty print the arra data via forEach
-    // printOrder.forEach
-
-    // console.log('=====>', printData)
+    // inefficient capture of last element to print array
+    let logline
+    node.data.toString().length < 2
+      ? logline = chalk.green(`${chalk.grey(' |  '.repeat(depth - 1))} ${node.data} ${chalk.green.dim('*')}`)
+      : logline = chalk.green(`${chalk.grey(' |  '.repeat(depth - 1))} ${node.data} ${chalk.green.dim('*')}`)
+    // populate the pring object
+      rawData.push(node)
+    // update raw data  
+    printData.push(logline)
     printData.forEach(node => console.log(node))
     
-    // console.log(test)
-    // return the data array
-    // console.log('PD==>', printData)
-    // console.log('RS==>', rightStack)
-    // console.log('LQ==>', leftQueue)
-    return printData
+    return rawData
   }
 
-
-
-  // rebalance
+  // rebalance/ rotation
+    // let X = rotation direction, Y = counter direction
+    // 1. Clone the Root (R0)
+    // - cc root to Temp variable (T0)
+    // 2. Foster the grandkids
+    // - find the root node's Y child (R0.y)'s X child (R0.y.x)
+    // - move (R0.y.x) to T0.x child position. call this T1.
+    // - set former parent R0.y.x position to 'null'
+    // 3. Promote the Child 
+    // - assign R0.y to the root node position (R0). Call this R1
+    // 4. Adopt the Clone
+    // - move the clone to R1.x chil position 
 }
 
 module.exports = BinarySearchTree

@@ -9,7 +9,7 @@ describe('The Binary Search Tree', () => {
   let methods = Object.getOwnPropertyNames(proto)
   let arr = [7,5,10,3,6,9,12,1,4,8,11,14]
   arr.forEach(data => bst.insert(data))
-  // console.log( bst)
+  bst.printTree()
 
   describe('=> The #new function', () => {
     let bst = new BinarySearchTree()
@@ -151,23 +151,23 @@ xdescribe('The BST #print method', () => {
   });
 });
 
-describe.only('=> The new #printTree function', () => {
+describe('=> The new #printTree function', () => {
   let bst = new BinarySearchTree();
   // set initial array for tree
   let arr = [10,6,15,5,8,13,18,4,7,9,16,20,17]
   arr.forEach(item => bst.insert(item))
-  let test = bst.printTree()
+  let raw = bst.printTree()
   // produce data array for comparison
   let data = [];
-  test.forEach(node => {
+  raw.forEach(node => {
     data.push(node.data)
   })
   
   it('... returns an array', () => {
-    expect(test).to.be.an('array')
+    expect(raw).to.be.an('array')
   });
   
-  xit('... returns the expect data from node array', () => {
+  it('... returns the expect data from node array', () => {
     let printOut = [10,6,5,4,8,7,9,15,13,18,16,17,20]
     expect(data).to.eql(printOut)
   });
