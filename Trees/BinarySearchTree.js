@@ -80,6 +80,7 @@ class BinarySearchTree {
     }
     return output
   }
+
   //  === Search ===
   // find the minimum element in the tree
   getMin(node = this.root) {
@@ -89,7 +90,7 @@ class BinarySearchTree {
     }
     return node
   }
-  //
+  // find the maximum element in the tree
   getMax(node = this.root) {
     while(node.right) {
       node = node.right;
@@ -97,6 +98,15 @@ class BinarySearchTree {
     return node
   }
 
+  // Helper method to provide a pretty console.log format for print function
+  logFormat(node, depth = 1, color = white, tag = '') {
+    return node.data.toString().length < 2 
+    // for single digit numbers, adding a leading '0' digit as well
+    ? chalk[color](`${chalk.grey(' |  '.repeat(depth - 1))} 0${node.data}${chalk[color].dim(tag)}`)
+    // for double digit numbers
+    : chalk[color](`${chalk.grey(' |  '.repeat(depth - 1))} ${node.data}${chalk[color].dim( tag)}`)
+  }
+  // print the tree to console and return an array of nodes, sorted in tree display (prefix) order
   printTree() {
     // create queue and stack tuples with node for key and tree depth for values
     let leftQueue = []// map of left children
@@ -105,13 +115,11 @@ class BinarySearchTree {
     // intialize the data
     let node = this.root; // set initial node
     let depth = 1; // current depth of node
-    let rawData = []; // capture raw node sequence. Init with root node
-    // initialize print object
-    let printData = [chalk.yellow.dim.bold(`Binary Search Tree :\n`)] 
+    let rawData = [node]; // capture raw node sequence, initialize with root node
+    let printData = [chalk.yellow.dim.bold(`Binary Search Tree :\n`)] // initialize print object
 
-    // iterate over nodes
     do {
-      rawData.push(node)
+      // rawData.push(node)
       let left = node.left; // current left-chlld
       let right = node.right; // current right-child
       // populate data with node's children
@@ -122,16 +130,12 @@ class BinarySearchTree {
         rightStack.push([right, depth + 1]) // default depth for root node
       }
       
-      // account for leafs and adjust print layout for length of data
-      let logline 
-      if (!left && !right) {
-        node.data.toString().length < 2
-        ? logline = chalk.green(`${chalk.grey(' |  '.repeat(depth - 1))}${node.data}${chalk.green.dim(' *')}`)
-        : logline = chalk.green(`${chalk.grey(' |  '.repeat(depth - 1))} ${node.data}${chalk.green.dim(' *')}`) 
-      } else { // for non leaf nodes
-        node.data.toString().length < 2
-        ? logline = `${chalk.grey(' |  '.repeat(depth - 1))} ${node.data} ${chalk.grey('-+')}`
-        : logline = `${chalk.grey(' |  '.repeat(depth - 1))}  ${node.data} ${chalk.grey('-+')}`
+      if (node === this.root) {
+        printData.push(this.logFormat(node, depth, 'yellow', '-root \n')) // print format for the root node
+      } else if (!left && !right) { 
+        printData.push(this.logFormat(node, depth, 'green', '-*')) // print format for leaf nodes
+      } else { 
+        printData.push(this.logFormat(node, depth, 'white', '--|')) // general print format
       }
       // reset node and depth variables for next node
       if (leftQueue.length) { // left child operations
@@ -143,22 +147,16 @@ class BinarySearchTree {
         node = tuplete[0]; // reset the node 
         depth = tuplete[1]; // reset the depth
       }
-      // populate the printing array
-      printData.push(logline)
-      // validate final node ...
-    } while ( (node.right || node.left) || (leftQueue.length || rightStack.length)) 
+       // populate the return data object with the current node 
+       rawData.push(node)
+    }
+    while ((node.right || node.left) || (leftQueue.length || rightStack.length)) // verify end node
     
-    // inefficient capture of last element to print array
-    let logline
-    node.data.toString().length < 2
-      ? logline = chalk.green(`${chalk.grey(' |  '.repeat(depth - 1))} ${node.data} ${chalk.green.dim('*')}`)
-      : logline = chalk.green(`${chalk.grey(' |  '.repeat(depth - 1))} ${node.data} ${chalk.green.dim('*')}`)
-    // populate the pring object
-      rawData.push(node)
-    // update raw data  
-    printData.push(logline)
+    // capture log  of last element to print array
+    printData.push(this.logFormat(node, depth, 'green', '-*'))
+    // update and print the data to console
     printData.forEach(node => console.log(node))
-    
+
     return rawData
   }
 
