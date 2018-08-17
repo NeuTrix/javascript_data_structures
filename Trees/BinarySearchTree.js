@@ -131,7 +131,7 @@ class BinarySearchTree {
       }
       
       if (node === this.root) {
-        printData.push(this.logFormat(node, depth, 'yellow', '-root \n')) // print format for the root node
+        printData.push(this.logFormat(node, depth, 'cyan', '-root')) // print format for the root node
       } else if (!left && !right) { 
         printData.push(this.logFormat(node, depth, 'green', '-*')) // print format for leaf nodes
       } else { 
@@ -159,7 +159,6 @@ class BinarySearchTree {
 
     return rawData
   }
-
   // rebalance/ rotation
     // let X = rotation direction, Y = counter direction
     // 1. Clone the Root (R0)
