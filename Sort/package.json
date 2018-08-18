@@ -1,0 +1,11 @@
+{
+  "name": "sort",
+  "version": "1.0.0",
+  "description": "sorting algos in js",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "author": "NeuTrix",
+  "license": "MIT"
+}
