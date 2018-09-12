@@ -100,7 +100,8 @@ class Sort {
     let sorted = [];
 
     arr.forEach(value => {
-      sorted = this.combine(sorted, [value]);
+      sorted = this.combine(sorted, arr = [value]);
+      // could simply pass `[value]` but this reads better
     })
 
     return sorted
