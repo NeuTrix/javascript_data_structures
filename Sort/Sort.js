@@ -61,19 +61,16 @@ class Sort {
     console.time(`\t ${title}`);
       for (let outr = 0; outr < n ; outr++) {
         let min = null;
-
         // set the min index based on smallest found
         for (let inr = 0 ; inr < n ; inr++) {
-          if(!binary[inr]) {
-            if (min === null || arr[inr] < arr[min]) {
-              min = inr;
-              
-            }
+          // eval min === null in case arr value = 0
+          if(!binary[inr] && (min === null || arr[inr] < arr[min])) {
+            min = inr;
           }
         }
-        binary[min] = 1;
-        sorted[outr] = arr[min];
-        counter++;
+        binary[min] = 1; // mark as selected
+        sorted[outr] = arr[min]; // build retur array
+        counter++; // track iterations
         console.log(` iteration: ${counter} ==> [ ${sorted} ] \n`);
       }
     console.timeEnd(`\t ${title}`);
