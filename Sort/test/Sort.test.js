@@ -140,7 +140,7 @@ describe('The Sorting class', () => {
     });
   });
 
-  describe.only('The (recursive) Quck Sort algorithm', () => {
+  describe('The (recursive) Quck Sort algorithm', () => {
     it('... is a viable function', () => {
       expect(Sort.quick_recu).to.be.a('function');
     });
@@ -153,7 +153,7 @@ describe('The Sorting class', () => {
       expect(Sort.quick_recu([7])).to.eql([7]);
     });
 
-    it.only('... sorts with simple arr or 2 elements ', () => {
+    it('... sorts with simple arr or 2 elements ', () => {
       expect(Sort.quick_recu(unsorted)).to.eql(sorted);
     });
   });
