@@ -96,10 +96,11 @@ class Sort {
     return this.combine(left, right)
   }
 
-  // ======= Helper Functions =========
+  
 
-// print formating for title and end or sort
-  // ====> merge sort Helpers
+  // *************** Helper Functions ***************
+
+  // ===== SORTING HELPERS =====
   // combine |sorted| arrays
   static combine(left = [], right = []) { // set defaults
     const result = [];
@@ -109,29 +110,20 @@ class Sort {
       if (left.length && right.length ) {
         // ...then, grab and push the smallest to result...
         left[0] < right[0]
-          ? result.push(left.shift())
-          : result.push(right.shift());
-      // Otherwise if only one is empty...
+        ? result.push(left.shift())
+        : result.push(right.shift());
+        // Otherwise if only one is empty...
       } else if (left.length) {
-          result.push(left.shift()); // clear the left array
+        result.push(left.shift()); // clear the left array
       } else if (right.length) {
-          result.push(right.shift()); // clear the right array
+        result.push(right.shift()); // clear the right array
       }
     }
     return result;
   }
-
+  // find midpoint index in an array
   static findMidPoint(arr) {
     return Math.floor(arr.length / 2);
-  }
-
-  static printTitle(arr, title, marg) {
-    console.log(`\n ${'*'.repeat(marg)} ${title} ${'*'.repeat(marg)}\n\n`)
-    console.log(` starting Array:  [ ${arr} ] \n`);
-  }
-
-  static printEnd(title, marg) {
-    console.log(`\n ${'*'.repeat(2 + title.length + (marg * 2))}\n\n`);
   }
   // swap elements in an array
   static swap(index1, index2, arr) {
@@ -139,6 +131,18 @@ class Sort {
     arr[index1] = arr[index2];
     arr[index2] = temp;
   }
+
+  // ===== PRINTER HELPERS =====
+  //print formating for title
+  static printTitle(arr, title, marg) {
+    console.log(`\n ${'*'.repeat(marg)} ${title} ${'*'.repeat(marg)}\n\n`)
+    console.log(` starting Array:  [ ${arr} ] \n`);
+  }
+  // print closing graphic
+  static printEnd(title, marg) {
+    console.log(`\n ${'*'.repeat(2 + title.length + (marg * 2))}\n\n`);
+  }
+  
 }
 
 module.exports = Sort;

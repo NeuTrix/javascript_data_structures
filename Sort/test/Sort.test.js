@@ -16,7 +16,7 @@ describe('The Sorting class', () => {
       expect(Sort.bubble).to.be.a('function');
     });
 
-    xit('... sorts a very small arr of n = 2', () => {
+    it('... sorts a very small arr of n = 2', () => {
       let arr = [69, 33]
       expect(Sort.bubble(arr)).to.eql([33, 69]);
     });
@@ -104,8 +104,7 @@ describe('The Sorting class', () => {
 
   });
   
-  describe.only('The (recursive) Merge Sort algorithm', () => {
-    
+  describe('The (recursive) Merge Sort algorithm', () => {
     it('... is a viable function', () => {
       expect(Sort.merge_rec).to.be.a('function');
     });
@@ -121,11 +120,24 @@ describe('The Sorting class', () => {
     it('... sorts with simple arr or 2 elements ', () => {
       expect(Sort.merge_rec(unsorted)).to.eql(sorted);
     });
-
-    // it('... sorts with args passed to #insertion of Sort', () => {
-    //   expect(Sort.merge_rec(unsorted)).to.eql(sorted);
-    // });
-
   });
+
+describe.only('The (iterative) Merge Sort algorithm', () => {
+  it('... is a viable function', () => {
+    expect(Sort.merge_iter).to.be.a('function');
+  });
+
+  it('... handles an empty array', () => {
+    expect(Sort.merge_iter([])).to.eql([]);
+  });
+
+  it('... sorts with simple arr or 1 element ', () => {
+    expect(Sort.merge_iter([7])).to.eql([7]);
+  });
+
+  it('... sorts with simple arr or 2 elements ', () => {
+    expect(Sort.merge_iter(unsorted)).to.eql(sorted);
+  });
+});
 
 });
