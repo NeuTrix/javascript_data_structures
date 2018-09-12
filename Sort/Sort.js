@@ -107,20 +107,16 @@ class Sort {
     while (left.length || right.length) {
       // ...if both have values...
       if (left.length && right.length ) {
-        // ...then, grab the smallest...
-        if (left[0] < right[0]) {
-          result.push(left.shift()) ;
-        } else if (left[0] >= right[0]) {
-          result.push(right.shift());
-        }
-      // Otherwise if one is empty...
+        // ...then, grab and push the smallest to result...
+        left[0] < right[0]
+          ? result.push(left.shift())
+          : result.push(right.shift());
+      // Otherwise if only one is empty...
       } else if (left.length) {
-          result.push(left.shift());
+          result.push(left.shift()); // clear the left array
       } else if (right.length) {
-          result.push(right.shift());
+          result.push(right.shift()); // clear the right array
       }
-      // for testing: 
-      // console.log(`==> L: [${left}] | R: [${right}] | Comb : [${result}] \n`)
     }
     return result;
   }
