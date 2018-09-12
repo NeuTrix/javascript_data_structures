@@ -104,7 +104,7 @@ describe('The Sorting class', () => {
 
   });
   
-  describe('The (recursive) Merge Sort algorithm', () => {
+  describe.only('The (recursive) Merge Sort algorithm', () => {
     it('... is a viable function', () => {
       expect(Sort.merge_rec).to.be.a('function');
     });

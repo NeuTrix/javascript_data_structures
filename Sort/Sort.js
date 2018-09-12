@@ -50,14 +50,15 @@ class Sort {
   }
 
   static insertion(arr = []) {
-    // #print constants
+    // for #print function
     const title = 'Insertion Sort';
     const marg = 15;
+    let counter = 0; // track iterations
+    //  for algorithm
     const n = arr.length; 
     const sorted = [] // build new array
-    const binary =  new Array(n).fill(0) // track selected minimums
-    let counter = 0; // track iterations
-    // ? build error and edge case checks (eg empty, null)
+    const binary =  new Array(n).fill(0) // track selected items
+
     this.printTitle(arr, title, marg)
     console.time(`\t ${title}`);
       for (let outr = 0; outr < n ; outr++) {
@@ -81,28 +82,37 @@ class Sort {
   }
 
   static merge_rec(arr) {
-    // base case
-    if (arr.length <= 1) {
+    if (arr.length <= 1) { // base case
       return arr
     }
-    // for printing
-    const title = 'Merge Sort';
-    const marg = 15;
-    // for algorithm
     const mid = this.findMidPoint(arr)
     const left = this.merge_rec(arr.slice(0, mid));
     const right = this.merge_rec(arr.slice(mid));
 
-    return this.combine(left, right)
+    return this.combine(left, right);
   }
 
-  static merge_iter(arr) {
-    let sorted = [];
+  static merge_iter(arr = []) {
+    // for printing
+    const title = 'Merge Sort (iterative)';
+    const marg = 10;
+    let counter = 0; // track iterations
+    this.printTitle(arr, title, marg);
+    console.time(`\t ${title}`);
 
+    // for algo
+    let sorted = [];
+    
     arr.forEach(value => {
-      sorted = this.combine(sorted, arr = [value]);
       // could simply pass `[value]` but this reads better
+      sorted = this.combine(sorted, arr = [value]);
+      // for printing
+      counter++; // track iterations
+      console.log(` iteration: ${counter} ==> [ ${sorted} ] \n`);
     })
+    // for printing
+    console.timeEnd(`\t ${title}`);
+    this.printEnd(title, marg);
 
     return sorted
   }
@@ -131,11 +141,11 @@ class Sort {
     return result;
   }
   // find midpoint index in an array
-  static findMidPoint(arr) {
+  static findMidPoint(arr =[]) {
     return Math.floor(arr.length / 2);
   }
   // swap elements in an array
-  static swap(index1, index2, arr) {
+  static swap(index1, index2, arr = []) {
     const temp = arr[index1];
     arr[index1] = arr[index2];
     arr[index2] = temp;
