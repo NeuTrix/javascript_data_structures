@@ -22,14 +22,10 @@ describe('The Sorting class', () => {
       expect(Sort.bubble(unsortedArr)).to.eql(sortedArr);
     });
 
-    /* xit('... can print a function', () => {
-      Sort.print(Sort.bubble(unsortedArr))
-    }); */
-
     /* xit('... returns an error for a null array', () => {
       // how to keep program from breaking on this test
       let arr = [];
-      expect(Sort.bubble(arr)).to.throw(Error);
+      console.log(Sort.bubble(arr))
     }); */
 
     /* xit('... returns an error for single element array', () => {
@@ -46,12 +42,29 @@ describe('The Sorting class', () => {
     });
 
     it('... sorts a very small arr of n = 2', () => {
-      let arr = [69, 33]
-      expect(Sort.selection(arr)).to.eql([33, 69]);
+      let arr = [3, 20, 17, 2, 4, 0]
+      expect(Sort.selection(arr)).to.eql([0, 2, 3, 4, 17, 20]);
     });
 
-    xit('... sorts with args passed to #selection of Sort', () => {
+    it('... sorts with args passed to #selection of Sort', () => {
       expect(Sort.selection(unsortedArr)).to.eql(sortedArr);
+    });
+
+  });
+
+  xdescribe('The Insertion Sort algorithm', () => {
+
+    it('... is a viable function', () => {
+      expect(Sort.insertion).to.be.a('function');
+    });
+
+    it('... sorts a very small arr of n = 2', () => {
+      let arr = [3, 20, 17, 2, 4, 0]
+      expect(Sort.insertion(arr)).to.eql([0, 2, 3, 4, 17, 20]);
+    });
+
+    it('... sorts with args passed to #insertion of Sort', () => {
+      expect(Sort.insertion(unsortedArr)).to.eql(sortedArr);
     });
 
   });
