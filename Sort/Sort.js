@@ -6,25 +6,25 @@ class Sort {
     const marg = 15;
     let counter = 0;
     // ? build error and edge case checks (eg empty, null)
-    this.printTitle(arr, title, marg)
+    this.printTitle(arr, title, marg);
     console.time(`\t ${title}`);
       for (let outer = arr.length; outer >= 2; outer--) {
         for (let inner = 0; inner <= outer - 2; inner++) {
           if (arr[inner] > arr[inner + 1]) {
-            this.swap(inner, inner + 1, arr)
+            this.swap(inner, inner + 1, arr);
           }
         }
         counter++;
-        console.log(` iteration: ${counter} ==> [ ${arr} ] \n`)
+        console.log(` iteration: ${counter} ==> [ ${arr} ] \n`);
       }
     console.timeEnd(`\t ${title}`);
-    this.printEnd(title, marg)
+    this.printEnd(title, marg);
       
     return arr;
   }
 
   static selection(arr = []) {
-    const title = 'Bubble Sort';
+    const title = 'Selection Sort';
     const marg = 15;
     let counter = 0;
     // ? build error and edge case checks (eg empty, null)
@@ -40,12 +40,46 @@ class Sort {
         }
         this.swap(outer, minIndex, arr);
         counter++;
-        console.log(` iteration: ${counter} ==> [ ${arr} ] \n`)
+        console.log(` iteration: ${counter} ==> [ ${arr} ] \n`);
       }
     console.timeEnd(`\t ${title}`);
-    this.printEnd(title, marg)
+    this.printEnd(title, marg);
 
     return arr;
+  }
+
+  static insertion(arr = []) {
+    // #print constants
+    const title = 'Insertion Sort';
+    const marg = 15;
+    const n = arr.length; 
+    const sorted = [] // build new array
+    const binary =  new Array(n).fill(0) // track selected minimums
+    let counter = 0; // track iterations
+    // ? build error and edge case checks (eg empty, null)
+    this.printTitle(arr, title, marg)
+    console.time(`\t ${title}`);
+      for (let outr = 0; outr < n ; outr++) {
+        let min = null;
+
+        // set the min index based on smallest found
+        for (let inr = 0 ; inr < n ; inr++) {
+          if(!binary[inr]) {
+            if (min === null || arr[inr] < arr[min]) {
+              min = inr;
+              
+            }
+          }
+        }
+        binary[min] = 1;
+        sorted[outr] = arr[min];
+        counter++;
+        console.log(` iteration: ${counter} ==> [ ${sorted} ] \n`);
+      }
+    console.timeEnd(`\t ${title}`);
+    this.printEnd(title, marg);
+
+    return sorted;
   }
 
   // ======= Helper Functions =========
@@ -64,13 +98,6 @@ class Sort {
     const temp = arr[index1];
     arr[index1] = arr[index2];
     arr[index2] = temp;
-  }
-
-  static arrIntegrity(arr) {
-    if (arr.length <= 0) {
-      console.log('aspodifupaosduf')
-      throw new Error('Array arg is empty or null.')
-    }
   }
 
 }
