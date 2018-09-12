@@ -81,24 +81,19 @@ class Sort {
   }
 
   static merge_rec(arr) {
-    // for printing
-    // const title = 'Merge Sort';
-    // const marg = 15;
     // base case
-    let length = arr.length;
-    if ( length <= 1) {
+    if (arr.length <= 1) {
       return arr
     }
+    // for printing
+    const title = 'Merge Sort';
+    const marg = 15;
     // for algorithm
-    // let mid = this.findMidPoint(arr)
-    let mid = Math.floor(length / 2);
+    const mid = this.findMidPoint(arr)
+    const left = this.merge_rec(arr.slice(0, mid));
+    const right = this.merge_rec(arr.slice(mid));
 
-    // let left = arr.slice(0, mid);
-    // let right = arr.slice(mid);
-    let left = this.merge_rec(arr.slice(0, mid));
-    let right = this.merge_rec(arr.slice(mid));
     return this.combine(left, right)
-    // return this.combine(this.merge_rec(left), this.merge_rec(right));
   }
 
   // ======= Helper Functions =========
@@ -106,12 +101,12 @@ class Sort {
 // print formating for title and end or sort
   // ====> merge sort Helpers
   // combine |sorted| arrays
-  static combine(left = [], right = []) {
+  static combine(left = [], right = []) { // set defaults
     const result = [];
     // while either has length...
-    while (left.length > 0 || right.length > 0) {
+    while (left.length || right.length) {
       // ...if both have values...
-      if (left.length > 0 && right.length > 0) {
+      if (left.length && right.length ) {
         // ...then, grab the smallest...
         if (left[0] < right[0]) {
           result.push(left.shift()) ;
@@ -119,14 +114,14 @@ class Sort {
           result.push(right.shift());
         }
       // Otherwise if one is empty...
-      } else if (left.length  > 0) {
+      } else if (left.length) {
           result.push(left.shift());
-      } else if (right.length > 0) {
+      } else if (right.length) {
           result.push(right.shift());
       }
-      console.log(`==> L: [${left}] | R: [${right}] | Comb : [${result}] \n`)
+      // for testing: 
+      // console.log(`==> L: [${left}] | R: [${right}] | Comb : [${result}] \n`)
     }
-    
     return result;
   }
 
@@ -148,7 +143,6 @@ class Sort {
     arr[index1] = arr[index2];
     arr[index2] = temp;
   }
-
 }
 
 module.exports = Sort;
