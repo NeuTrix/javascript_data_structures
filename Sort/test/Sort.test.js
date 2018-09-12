@@ -6,7 +6,7 @@ describe('The Sorting class', () => {
   let unsorted, sorted;
 
   beforeEach(() => {
-    unsorted = [3, 20, 17, 2, 4, 0]
+    unsorted = [17, 20, 0, 2, 3, 4]
     sorted = [0, 2, 3, 4, 17, 20];
   })
 
@@ -104,7 +104,7 @@ describe('The Sorting class', () => {
 
   });
   
-  describe.only('The (recursive) Merge Sort algorithm', () => {
+  describe('The (recursive) Merge Sort algorithm', () => {
     it('... is a viable function', () => {
       expect(Sort.merge_rec).to.be.a('function');
     });
@@ -122,22 +122,40 @@ describe('The Sorting class', () => {
     });
   });
 
-describe.only('The (iterative) Merge Sort algorithm', () => {
-  it('... is a viable function', () => {
-    expect(Sort.merge_iter).to.be.a('function');
+  describe('The (iterative) Merge Sort algorithm', () => {
+    it('... is a viable function', () => {
+      expect(Sort.merge_iter).to.be.a('function');
+    });
+
+    it('... handles an empty array', () => {
+      expect(Sort.merge_iter([])).to.eql([]);
+    });
+
+    it('... sorts with simple arr or 1 element ', () => {
+      expect(Sort.merge_iter([7])).to.eql([7]);
+    });
+
+    it('... sorts with simple arr or 2 elements ', () => {
+      expect(Sort.merge_iter(unsorted)).to.eql(sorted);
+    });
   });
 
-  it('... handles an empty array', () => {
-    expect(Sort.merge_iter([])).to.eql([]);
-  });
+  describe.only('The (recursive) Quck Sort algorithm', () => {
+    it('... is a viable function', () => {
+      expect(Sort.quick_recu).to.be.a('function');
+    });
 
-  it('... sorts with simple arr or 1 element ', () => {
-    expect(Sort.merge_iter([7])).to.eql([7]);
-  });
+    it('... handles an empty array', () => {
+      expect(Sort.quick_recu([])).to.eql([]);
+    });
 
-  it('... sorts with simple arr or 2 elements ', () => {
-    expect(Sort.merge_iter(unsorted)).to.eql(sorted);
+    it('... sorts with simple arr or 1 element ', () => {
+      expect(Sort.quick_recu([7])).to.eql([7]);
+    });
+
+    it.only('... sorts with simple arr or 2 elements ', () => {
+      expect(Sort.quick_recu(unsorted)).to.eql(sorted);
+    });
   });
-});
 
 });

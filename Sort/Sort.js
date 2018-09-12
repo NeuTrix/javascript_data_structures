@@ -117,6 +117,26 @@ class Sort {
     return sorted
   }
 
+  static quick_recu(arr = []) {
+    if (arr.length <= 1) {
+      return arr;
+    } // base case
+    let left =  [];
+    let right = [];
+    let pivot = arr.pop();
+    // sort the balance of array Big O(n)
+    arr.forEach(val => {
+      val < pivot ? left.push(val) : right.push(val);
+    })
+    // log results
+    console.log(`\t==> Left: [${left}] | Pivot: ${pivot} | Right: [${right}] `)
+    // recurse left and right arrays to base cases
+    left = this.quick_recu(left);
+    right = this.quick_recu(right);
+    // insert the pivot between the L | R results 
+    return left.concat(pivot).concat(right)
+  }
+
   // *************** Helper Functions ***************
 
   // ===== SORTING HELPERS =====
