@@ -96,7 +96,15 @@ class Sort {
     return this.combine(left, right)
   }
 
-  
+  static merge_iter(arr) {
+    let sorted = [];
+
+    arr.forEach(value => {
+      sorted = this.combine(sorted, [value]);
+    })
+
+    return sorted
+  }
 
   // *************** Helper Functions ***************
 
