@@ -62,12 +62,15 @@ describe('The Sorting class', () => {
 
   });
 
-  describe.only ('The Merge Sort HELPER methods', () => {
-    let even, odd, sorted
+  describe ('The Merge Sort HELPER methods', () => {
+    let even, odd, sorted;
 
     beforeEach(() => {
+      unEven = [9, 1, 11, 4];
       even = [1, 4, 9, 11];
       odd = [2, 5, 7, 8, 10];
+      unOdd = [8, 5, 10, 7, 2];
+      sortedOdd = [];
       sorted = [1, 2, 4, 5, 7, 8, 9, 10, 11];
     });
 
@@ -101,30 +104,28 @@ describe('The Sorting class', () => {
 
   });
   
-  // xdescribe('The (recursive) Merge Sort algorithm', () => {
+  describe.only('The (recursive) Merge Sort algorithm', () => {
     
-  //   it('... is a viable function', () => {
-  //     expect(Sort.merge_rec).to.be.a('function');
-  //   });
+    it('... is a viable function', () => {
+      expect(Sort.merge_rec).to.be.a('function');
+    });
 
-  //   it('... handles an empty array', () => {
-  //     expect(Sort.merge_rec([])).to.eql([]);
-  //   });
+    it('... handles an empty array', () => {
+      expect(Sort.merge_rec([])).to.eql([]);
+    });
 
-  //   it('... sorts with simple arr or 1 element ', () => {
-  //     expect(Sort.merge_rec([7])).to.eql([7]);
-  //   });
+    it('... sorts with simple arr or 1 element ', () => {
+      expect(Sort.merge_rec([7])).to.eql([7]);
+    });
 
-  //   it('... sorts with simple arr or 2 elements ', () => {
-  //     let arr = [7, 0,5,6,12]
-  //     // expect(Sort.merge_rec(arr)).to.eql([7]);
-  //   });
+    it('... sorts with simple arr or 2 elements ', () => {
+      expect(Sort.merge_rec(unsorted)).to.eql(sorted);
+    });
 
+    // it('... sorts with args passed to #insertion of Sort', () => {
+    //   expect(Sort.merge_rec(unsorted)).to.eql(sorted);
+    // });
 
-  //   // it('... sorts with args passed to #insertion of Sort', () => {
-  //   //   expect(Sort.merge_rec(unsorted)).to.eql(sorted);
-  //   // });
-
-  // });
+  });
 
 });

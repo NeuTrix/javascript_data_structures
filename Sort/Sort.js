@@ -93,12 +93,12 @@ class Sort {
     // let mid = this.findMidPoint(arr)
     let mid = Math.floor(length / 2);
 
-    let left = arr.slice(0, mid);
-    let right = arr.slice(mid);
-    // let left = this.merge_rec(arr.slice(0, mid));
-    // let right = this.merge_rec(arr.slice(mid));
-
-    return this.combine(this.merge_rec(left), this.merge_rec(right));
+    // let left = arr.slice(0, mid);
+    // let right = arr.slice(mid);
+    let left = this.merge_rec(arr.slice(0, mid));
+    let right = this.merge_rec(arr.slice(mid));
+    return this.combine(left, right)
+    // return this.combine(this.merge_rec(left), this.merge_rec(right));
   }
 
   // ======= Helper Functions =========
