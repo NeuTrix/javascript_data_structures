@@ -7,17 +7,19 @@ class Sort {
     }
     let counter = 0;
       console.log(`\n ${'*'.repeat(30)}\n\n`)
+      console.log(` starting Array:  [ ${arr} ] \n`)
     for (let outer = arr.length; outer >= 2; outer--) {
-      console.log(` iterations: ${counter} array: [ ${arr} ] \n`)
-      for (let inner = 0; inner < outer - 2; inner++) {
-
+      for (let inner = 0; inner <= outer - 2; inner++) {
+        if (arr[inner] > arr[inner + 1]) {
+          let temp = arr[inner];
+          arr[inner] = arr[inner + 1];
+          arr[inner + 1] = temp;
+        }
       }
-
-      counter++
+      counter++;
+      console.log(` iteration: ${counter} ==> [ ${arr} ] \n`)
     }
-
       console.log(`\n ${'*'.repeat(30)}\n\n`)
-
     return arr;
   }
 
