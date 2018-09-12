@@ -1,6 +1,7 @@
 // various sorting algortihmm in js
 class Sort {
 
+
   static bubble(arr = []) {
     const title = 'Bubble Sort';
     const marg = 15;
@@ -17,7 +18,7 @@ class Sort {
         counter++;
         console.log(` iteration: ${counter} ==> [ ${arr} ] \n`);
       }
-    console.timeEnd(`\t ${title}`);
+      console.timeEnd(`\t ${title}`);
     this.printEnd(title, marg);
       
     return arr;
@@ -79,12 +80,63 @@ class Sort {
     return sorted;
   }
 
+  static merge_rec(arr) {
+    // for printing
+    // const title = 'Merge Sort';
+    // const marg = 15;
+    // base case
+    let length = arr.length;
+    if ( length <= 1) {
+      return arr
+    }
+    // for algorithm
+    // let mid = this.findMidPoint(arr)
+    let mid = Math.floor(length / 2);
+
+    let left = arr.slice(0, mid);
+    let right = arr.slice(mid);
+    // let left = this.merge_rec(arr.slice(0, mid));
+    // let right = this.merge_rec(arr.slice(mid));
+
+    return this.combine(this.merge_rec(left), this.merge_rec(right));
+  }
+
   // ======= Helper Functions =========
 
-  // print formating for title and end or sort
+// print formating for title and end or sort
+  // ====> merge sort Helpers
+  // combine |sorted| arrays
+  static combine(left = [], right = []) {
+    const result = [];
+    // while either has length...
+    while (left.length > 0 || right.length > 0) {
+      // ...if both have values...
+      if (left.length > 0 && right.length > 0) {
+        // ...then, grab the smallest...
+        if (left[0] < right[0]) {
+          result.push(left.shift()) ;
+        } else if (left[0] >= right[0]) {
+          result.push(right.shift());
+        }
+      // Otherwise if one is empty...
+      } else if (left.length  > 0) {
+          result.push(left.shift());
+      } else if (right.length > 0) {
+          result.push(right.shift());
+      }
+      console.log(`==> L: [${left}] | R: [${right}] | Comb : [${result}] \n`)
+    }
+    
+    return result;
+  }
+
+  static findMidPoint(arr) {
+    return Math.floor(arr.length / 2);
+  }
+
   static printTitle(arr, title, marg) {
     console.log(`\n ${'*'.repeat(marg)} ${title} ${'*'.repeat(marg)}\n\n`)
-    console.log(` starting Array:  [ ${arr} ] \n`)
+    console.log(` starting Array:  [ ${arr} ] \n`);
   }
 
   static printEnd(title, marg) {
