@@ -24,7 +24,7 @@
   "dependencies": {
     "chai": "^4.1.2",
     "chalk": "^2.4.1",
-    "jshint": "^2.9.5",
+    "jshint": "^2.9.6",
     "jslint": "^0.12.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.17.5"
