@@ -33,6 +33,8 @@ class Trie {
       charNode.isWordEnd = true;
       console.log(`\nThe node for character "${char}" is set to "${charNode.isWordEnd}"`)
     }
+    ads = 7
+    
 
     // reduce memo and recurse
     return this.insert(str.slice(1), kids.get(char), memo)
