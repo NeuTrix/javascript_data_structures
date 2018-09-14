@@ -60,10 +60,10 @@ describe.only('The Trie Class', () => {
     });
     
     it('returns an error if no string is passed', () => {
-      expect(trie.insert()).to.eql(-1);
+      expect(trie.insert()).to.eql('');
     });
 
-    it.only('can insert a single character', () => {
+    it('can insert a single character', () => {
       expect(trie.insert('F')).to.eql('F');
     });
 
@@ -71,11 +71,10 @@ describe.only('The Trie Class', () => {
       expect(trie.insert('monkey')).to.eql('monkey');
     });
 
-    it('returns name of inserted sub-string', () => {
+    it.only('returns name of inserted sub-string', () => {
       trie.insert('monkey')
       let substring = trie.insert('money');
-      // expect(substring).equal('moneys')
-      // expect()
+      expect(substring).equal('money')
     });
 
     it('marks the end of a word', () => {

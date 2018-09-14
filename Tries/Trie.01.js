@@ -12,15 +12,15 @@ class Trie {
     this.root = new Node('root');
   }
 
-  insert(str = null, node = this.root, word = []) {
+  insert(str = null, node = this.root, memo = []) {
     if (!str) { // validation
-      this.report(word.join(''))
-      return word.join('')
+      this.report(memo.join(''))
+      return memo.join('')
     } 
     
     const kids = node.children; // node kids map
     const char = str[0]; // first character of remaining string
-    word.push(char)
+    memo.push(char); // populate memo memo
 
     // add to map if not currently included
     if (!kids.has(char)) { 
@@ -29,16 +29,18 @@ class Trie {
 
     // settings for final character
     if (str.length === 1) {
-      kids.get(char).isWordEnd = true;
+      let charNode = kids.get(char)
+      charNode.isWordEnd = true;
+      console.log(`\nThe node for character "${char}" is set to "${charNode.isWordEnd}"`)
     }
-    
-    // reduce word and recurse
-    return this.insert(str.slice(1), kids.get(char), word)
+
+    // reduce memo and recurse
+    return this.insert(str.slice(1), kids.get(char), memo)
   }
 
   // ========= HELPER METHODS =========
-  report(word) {
-    console.log(`\n${'='.repeat(40)} \n\tThe word "${word}" has been added!\n${'='.repeat(40)} \n `)
+  report(memo) {
+    console.log(`\n${'='.repeat(40)} \n ==> The word "${memo}" has been added!\n${'='.repeat(40)} \n `)
     console.log(this)
     console.log(`\n${'='.repeat(40)}`)
   }
