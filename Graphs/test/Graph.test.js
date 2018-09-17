@@ -24,7 +24,7 @@ describe.only('The basic Graph class', () => {
     let adj = graph.adjList;
     expect(adj instanceof Map).to.eql(true)
     expect(adj.size).to.eql(verts.length)
-    // console.log(adj)
+    console.log(adj)
   });
 
 });
